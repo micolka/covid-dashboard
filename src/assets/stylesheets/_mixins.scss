@@ -1,0 +1,7 @@
+@import "variables";
+
+@mixin wrapper-props() {
+  margin: 3px;
+  background-color: $primary-color;
+  color: #ffffff;
+}

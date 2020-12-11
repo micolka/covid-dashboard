@@ -1,0 +1,10 @@
+@charset 'UTF-8';
+
+@import "variables";
+@import "mixins";
+
+.footer-wrapper {
+  @include wrapper-props;
+
+  grid-area: footer;
+}
