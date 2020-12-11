@@ -1,6 +1,6 @@
 @charset 'UTF-8';
-@import "variables";
-@import "mixins";
+@import 'variables';
+@import 'mixins';
 
 .header-wrapper {
   @include wrapper-props;
