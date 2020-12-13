@@ -7,25 +7,12 @@ import Stats from '@/components/Stats/Stats';
 import Table from '@/components/Table/Table';
 
 import { getSummary } from './API/API';
-import { TSummary } from './API/APITypes';
 import styles from './assets/stylesheets/index.scss';
 import MainPreloader from './components/Preloaders/MainPreloader';
+import { appInitialState } from './config';
 
 const App = (): JSX.Element => {
-  const initialState: TSummary = {
-    Message: '',
-    Global: {
-      NewConfirmed: 0,
-      TotalConfirmed: 0,
-      NewDeaths: 0,
-      TotalDeaths: 0,
-      NewRecovered: 0,
-      TotalRecovered: 0,
-    },
-    Countries: [],
-    Date: '',
-  };
-  const [summary, setSummary] = useState(initialState);
+  const [summary, setSummary] = useState(appInitialState);
   const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {

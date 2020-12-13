@@ -22,9 +22,7 @@ const Map = (props: PropsType): JSX.Element => {
   }, []);
 
   return (
-    <div
-      className={styles['map-wrapper']}
-    >
+    <div className={styles['map-wrapper']}>
       {`Map ${worldTotal.TotalRecovered} container${summary.Date}`}
     </div>
   );
