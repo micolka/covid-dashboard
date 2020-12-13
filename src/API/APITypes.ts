@@ -62,7 +62,7 @@ export type TAllStatus = {
 };
 
 export type WorldTotalWIP = {
-  TotalConfirmed: string;
-  TotalDeaths: string;
-  TotalRecovered: string;
+  TotalConfirmed: number;
+  TotalDeaths: number;
+  TotalRecovered: number;
 };
