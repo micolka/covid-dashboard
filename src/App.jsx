@@ -11,12 +11,12 @@ import styles from './assets/stylesheets/index.scss';
 import MainPreloader from './components/Preloaders/MainPreloader';
 import { appInitialState } from './config';
 
-const App = (): JSX.Element => {
+const App = () => {
   const [summary, setSummary] = useState(appInitialState);
   const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
-    async function fetchData(): Promise<void> {
+    async function fetchData() {
       const data = await getSummary();
       setSummary(data);
       setLoading(false);

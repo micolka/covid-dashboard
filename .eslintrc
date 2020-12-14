@@ -7,10 +7,10 @@
   "extends": [
     "airbnb-typescript",
     "airbnb/hooks",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:@typescript-eslint/recommended-requiring-type-checking"
+    // "plugin:@typescript-eslint/recommended",
+    // "plugin:@typescript-eslint/recommended-requiring-type-checking"
   ],
-  "parser": "@typescript-eslint/parser",
+  // "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "project": "./tsconfig.json",
     "ecmaVersion": 6,
@@ -20,7 +20,7 @@
     }
   },
   "plugins": [
-    "@typescript-eslint",
+    // "@typescript-eslint",
     "react-hooks",
     "jsx-a11y",
     "import",
@@ -45,37 +45,37 @@
     }
   },
   "rules": {
-    "@typescript-eslint/indent": ["error", 2],
-    "@typescript-eslint/no-this-alias": "error",
-    "@typescript-eslint/no-unnecessary-boolean-literal-compare": "error",
-    "@typescript-eslint/no-unused-expressions": ["error"],
-    "@typescript-eslint/no-unused-vars": "error",
-    "@typescript-eslint/no-non-null-assertion": "off",
-    "@typescript-eslint/quotes": [
-      "error",
-      "single",
-      {
-        "avoidEscape": true
-      }
-    ],
-    "@typescript-eslint/semi": [
-      "error",
-      "always"
-    ],
-    "@typescript-eslint/member-delimiter-style": [
-      "error",
-      {
-        "multiline": {
-          "delimiter": "semi",
-          "requireLast": true
-        },
-        "singleline": {
-          "delimiter": "semi",
-          "requireLast": false
-        }
-      }
-    ],
-    "@typescript-eslint/dot-notation": "off",
+  //   "@typescript-eslint/indent": ["error", 2],
+  //   "@typescript-eslint/no-this-alias": "error",
+  //   "@typescript-eslint/no-unnecessary-boolean-literal-compare": "error",
+  //   "@typescript-eslint/no-unused-expressions": ["error"],
+  //   "@typescript-eslint/no-unused-vars": "error",
+  //   "@typescript-eslint/no-non-null-assertion": "off",
+  //   "@typescript-eslint/quotes": [
+  //     "error",
+  //     "single",
+  //     {
+  //       "avoidEscape": true
+  //     }
+  //   ],
+  //   "@typescript-eslint/semi": [
+  //     "error",
+  //     "always"
+  //   ],
+  //   "@typescript-eslint/member-delimiter-style": [
+  //     "error",
+  //     {
+  //       "multiline": {
+  //         "delimiter": "semi",
+  //         "requireLast": true
+  //       },
+  //       "singleline": {
+  //         "delimiter": "semi",
+  //         "requireLast": false
+  //       }
+  //     }
+  //   ],
+  //   "@typescript-eslint/dot-notation": "off",
     "arrow-parens": [
       "error",
       "as-needed"
@@ -152,10 +152,10 @@
     "react/prop-types": "off",
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
-    "react/jsx-filename-extension": [1, {
-      "extensions": [".ts", ".tsx"]
-      }
-    ],
+    // "react/jsx-filename-extension": [1, {
+    //   "extensions": [".ts", ".tsx"]
+    //   }
+    // ],
     "react/jsx-fragments" : ["error", "element"],
     "react/jsx-props-no-spreading": "off",
     "space-before-function-paren": [

@@ -1,6 +1,4 @@
-import { TSummary } from './API/APITypes';
-
-export const appInitialState: TSummary = {
+export const appInitialState = {
   Message: '',
   Global: {
     NewConfirmed: 0,
