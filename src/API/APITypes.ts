@@ -61,10 +61,15 @@ export type TAllStatus = {
   Date: string;
 };
 
-export type WorldTotalWIP = {
+export type TWorldTotalWIP = {
   TotalConfirmed: number;
   TotalDeaths: number;
   TotalRecovered: number;
+};
+
+export type TPopulation = {
+  name: string;
+  population: number;
 };
 
 export type TCountryCoords = {

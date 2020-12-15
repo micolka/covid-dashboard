@@ -6,7 +6,7 @@ import Map from '@/components/Map/Map';
 import Stats from '@/components/Stats/Stats';
 import Table from '@/components/Table/Table';
 
-import { getSummary } from './API/API';
+import { getSummary, getPopulation } from './API/API';
 import styles from './assets/stylesheets/index.scss';
 import MainPreloader from './components/Preloaders/MainPreloader';
 import { appInitialState } from './config';
@@ -14,15 +14,18 @@ import { appInitialState } from './config';
 const App = () => {
   const [summary, setSummary] = useState(appInitialState);
   const [isLoading, setLoading] = useState(true);
-
   useEffect(() => {
     async function fetchData() {
-      const data = await getSummary();
-      setSummary(data);
+      const summaryData = await getSummary();
+      const population = await getPopulation();
+      setSummary({ ...summaryData, population });
       setLoading(false);
     }
-    fetchData();
-  }, []);
+
+    if (isLoading) {
+      fetchData();
+    }
+  }, [isLoading]);
 
   if (isLoading) {
     return (
@@ -38,8 +41,8 @@ const App = () => {
     <div className={styles['app-wrapper']}>
       <Header />
       <Map summary={summary} />
-      <Stats />
-      <Table />
+      <Stats summary={summary} />
+      <Table summary={summary} />
       <Footer />
     </div>
   );
