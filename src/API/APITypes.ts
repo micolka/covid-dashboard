@@ -66,3 +66,12 @@ export type WorldTotalWIP = {
   TotalDeaths: number;
   TotalRecovered: number;
 };
+
+export type TCountryCoords = {
+  name: string;
+  alpha2: string;
+  alpha3: string;
+  numeric: string;
+  latitude: number;
+  longitude: number;
+};
