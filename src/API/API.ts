@@ -1,9 +1,10 @@
 import {
-  TCountry, TAllStatus, TSummary, TGlobal, WorldTotalWIP,
+  TCountry, TAllStatus, TSummary, TGlobal, TWorldTotalWIP, TPopulation,
 } from './APITypes';
 
 export const API = {
   URL: 'https://api.covid19api.com',
+  URLCountries: 'https://restcountries.eu/rest/v2/all?fields=name;population',
   ENDPOINTS: {
     ALL: 'all',
     DATE: 'date',
@@ -29,6 +30,11 @@ export const getSummary = async (): Promise<TSummary> => {
   const { URL, ENDPOINTS } = API;
   const response = await fetch(`${URL}/${ENDPOINTS.SUMMARY}`);
   return (await response.json()) as TSummary;
+};
+
+export const getPopulation = async (): Promise<TPopulation> => {
+  const response = await fetch(`${API.URLCountries}`);
+  return (await response.json()) as TPopulation;
 };
 
 export const getDayOneTotalAllStatus = async (name: string): Promise<TAllStatus[]> => {
@@ -59,10 +65,10 @@ export const getWorldWIP = async (from: string, to: string): Promise<TGlobal[]> 
   return (await response.json()) as TGlobal[];
 };
 
-export const getWorldTotalWIP = async (): Promise<WorldTotalWIP> => {
+export const getWorldTotalWIP = async (): Promise<TWorldTotalWIP> => {
   const { URL, ENDPOINTS } = API;
   const { WORLD, TOTAL } = ENDPOINTS;
 
   const response = await fetch(`${URL}/${WORLD}/${TOTAL}`);
-  return (await response.json()) as WorldTotalWIP;
+  return (await response.json()) as TWorldTotalWIP;
 };
