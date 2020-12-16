@@ -11,14 +11,26 @@ import styles from './assets/stylesheets/index.scss';
 import MainPreloader from './components/Preloaders/MainPreloader';
 import { appInitialState } from './config';
 
+function updateSummaryData(Countries, populationData) {
+  return Countries.map(summaryElem => {
+    const country = populationData
+      .find(populationElem => populationElem.alpha2Code === summaryElem.CountryCode);
+    return { ...summaryElem, population: country.population };
+  });
+}
+
 const App = () => {
   const [summary, setSummary] = useState(appInitialState);
   const [isLoading, setLoading] = useState(true);
+
   useEffect(() => {
     async function fetchData() {
       const summaryData = await getSummary();
-      const population = await getPopulation();
-      setSummary({ ...summaryData, population });
+      const populationData = await getPopulation();
+      setSummary({
+        ...summaryData,
+        Countries: updateSummaryData(summaryData.Countries, populationData),
+      });
       setLoading(false);
     }
 
@@ -27,23 +39,23 @@ const App = () => {
     }
   }, [isLoading]);
 
-  if (isLoading) {
-    return (
-      <div className={styles['app-wrapper']}>
-        <div className={styles['preloader-wrapper']}>
-          <MainPreloader />
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div className={styles['app-wrapper']}>
-      <Header />
-      <Map summary={summary} />
-      <Stats summary={summary} />
-      <Table summary={summary} />
-      <Footer />
+      {
+        isLoading ? (
+          <div className={styles['preloader-wrapper']}>
+            <MainPreloader />
+          </div>
+        ) : (
+          <React.Fragment>
+            <Header />
+            <Map summary={summary} />
+            <Stats summary={summary} />
+            <Table summary={summary} />
+            <Footer />
+          </React.Fragment>
+        )
+      }
     </div>
   );
 };

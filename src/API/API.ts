@@ -11,7 +11,7 @@ import {
 export const API = {
   URL: 'https://api.covid19api.com',
   URL1: 'https://covid19-api.org/api',
-  URLCountries: 'https://restcountries.eu/rest/v2/all?fields=name;population',
+  URLCountries: 'https://restcountries.eu/rest/v2/all?fields=name;population;alpha2Code',
   ENDPOINTS: {
     ALL: 'all',
     DATE: 'date',
@@ -45,9 +45,9 @@ export const getSummary = async (): Promise<TSummary> => {
   return (await response.json()) as TSummary;
 };
 
-export const getPopulation = async (): Promise<TPopulation> => {
+export const getPopulation = async (): Promise<TPopulation[]> => {
   const response = await fetch(`${API.URLCountries}`);
-  return (await response.json()) as TPopulation;
+  return (await response.json()) as TPopulation[];
 };
 
 export const getDayOneTotalAllStatus = async (name: string): Promise<TAllStatus[]> => {

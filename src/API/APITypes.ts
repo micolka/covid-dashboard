@@ -70,6 +70,7 @@ export type TWorldTotalWIP = {
 export type TPopulation = {
   name: string;
   population: number;
+  alpha2Code: string;
 };
 
 export type TCountryCoords = {
