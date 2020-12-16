@@ -10,7 +10,6 @@ export const appInitialState = {
   },
   Countries: [],
   Date: '',
-  population: [],
 };
 
 export const anotherConst = '';
