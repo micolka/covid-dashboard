@@ -71,3 +71,12 @@ export type TPopulation = {
   name: string;
   population: number;
 };
+
+export type TCountryCoords = {
+  name: string;
+  alpha2: string;
+  alpha3: string;
+  numeric: string;
+  latitude: number;
+  longitude: number;
+};

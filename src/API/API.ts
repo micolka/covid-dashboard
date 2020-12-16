@@ -1,9 +1,16 @@
 import {
-  TCountry, TAllStatus, TSummary, TGlobal, TWorldTotalWIP, TPopulation,
+  TCountry,
+  TAllStatus,
+  TSummary,
+  TGlobal,
+  TWorldTotalWIP,
+  TCountryCoords,
+  TPopulation,
 } from './APITypes';
 
 export const API = {
   URL: 'https://api.covid19api.com',
+  URL1: 'https://covid19-api.org/api',
   URLCountries: 'https://restcountries.eu/rest/v2/all?fields=name;population',
   ENDPOINTS: {
     ALL: 'all',
@@ -24,6 +31,12 @@ export const getCountries = async (): Promise<TCountry[]> => {
   const { URL, ENDPOINTS } = API;
   const response = await fetch(`${URL}/${ENDPOINTS.COUNTRIES}`);
   return (await response.json()) as TCountry[];
+};
+
+export const getCountriesCoords = async (): Promise<TCountryCoords[]> => {
+  const { URL1, ENDPOINTS } = API;
+  const response = await fetch(`${URL1}/${ENDPOINTS.COUNTRIES}`);
+  return (await response.json()) as TCountryCoords[];
 };
 
 export const getSummary = async (): Promise<TSummary> => {
