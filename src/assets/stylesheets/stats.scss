@@ -7,8 +7,11 @@
   @include wrapper-props;
   grid-area: stats;
   padding: 1em;
-  .stats-table{
+  .stats-table {
     display: flex;
     justify-content: space-between;
   }
+}
+.none{
+  display: none;
 }
