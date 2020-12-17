@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import {
   MapContainer, LayerGroup, CircleMarker, TileLayer, Tooltip,
 } from 'react-leaflet';
@@ -6,12 +6,16 @@ import {
 import { getCountriesCoords } from '@/API/API';
 import styles from '@/assets/stylesheets/map.scss';
 import { calcCircleRadius } from '@/components/Map/utils';
+import { ContextApp } from '@/core/reducer';
 
 const Map = props => {
   const { summary } = props;
   const [countriesCoords, setCountriesCoords] = useState('');
   const [isLoading, setLoading] = useState(true);
+  const { state, dispatch } = useContext(ContextApp);
   const fillRedOptions = { fillColor: 'red', stroke: false, fillOpacity: 0.5 };
+
+  console.log(state)
 
   useEffect(() => {
     async function fetchData() {

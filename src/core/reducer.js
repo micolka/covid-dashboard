@@ -2,18 +2,16 @@ import React from 'react';
 
 export const ContextApp = React.createContext();
 
-export const initialState = {
-  app: {
-    test: 'test_context',
-  },
+export const initialReducerState = {
+  currentCountry: null,
 };
 
-export const testReducer = (state, action) => {
+export const appReducer = (state, action) => {
   switch (action.type) {
-    case 'test_update':
+    case 'SET-CURRENT-COUNTRY':
       return {
         ...state,
-        ...action.payload,
+        currentCountry: action.payload,
       };
     default:
       return state;
