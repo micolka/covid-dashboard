@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useReducer } from 'react';
 
 import Footer from '@/components/Footer/Footer';
 import Header from '@/components/Header/Header';
@@ -9,7 +9,8 @@ import Table from '@/components/Table/Table';
 import { getSummary, getPopulation } from './API/API';
 import styles from './assets/stylesheets/index.scss';
 import MainPreloader from './components/Preloaders/MainPreloader';
-import { appInitialState } from './config';
+import { appInitialState } from './core/config';
+import { ContextApp, initialState, testReducer } from './core/reducer';
 
 function updateSummaryData(Countries, populationData) {
   return Countries.map(summaryElem => {
@@ -22,6 +23,7 @@ function updateSummaryData(Countries, populationData) {
 const App = () => {
   const [summary, setSummary] = useState(appInitialState);
   const [isLoading, setLoading] = useState(true);
+  const [state, dispatch] = useReducer(testReducer, initialState);
 
   useEffect(() => {
     async function fetchData() {
@@ -48,11 +50,13 @@ const App = () => {
           </div>
         ) : (
           <React.Fragment>
-            <Header />
-            <Map summary={summary} />
-            <Stats summary={summary} />
-            <Table summary={summary} />
-            <Footer />
+            <ContextApp.Provider value={{ dispatch, state }}>
+              <Header />
+              <Map summary={summary} />
+              <Stats summary={summary} />
+              <Table summary={summary} />
+              <Footer />
+            </ContextApp.Provider>
           </React.Fragment>
         )
       }
