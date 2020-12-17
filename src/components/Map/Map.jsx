@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import {
-  MapContainer, LayerGroup, CircleMarker, TileLayer, Tooltip,
+  MapContainer, LayerGroup, CircleMarker, TileLayer, Tooltip, useMapEvents,
 } from 'react-leaflet';
 
 import { getCountriesCoords } from '@/API/API';
@@ -15,7 +15,30 @@ const Map = props => {
   const { state, dispatch } = useContext(ContextApp);
   const fillRedOptions = { fillColor: 'red', stroke: false, fillOpacity: 0.5 };
 
-  console.log(state)
+  function selectCountry(e) {
+    const alpha2 = e.originalEvent.path[0].classList[0];
+    const countryData = summary.Countries.find(elem => elem.CountryCode === alpha2);
+    return countryData;
+  }
+
+  function LocationMarker() {
+    const map = useMapEvents({
+      click(e) {
+        dispatch({
+          type: 'SET-CURRENT-COUNTRY',
+          payload: selectCountry(e),
+        });
+      },
+    });
+
+    if (state.currentCountry) {
+      const coords = countriesCoords
+        .find(coordsElem => coordsElem.alpha2 === state.currentCountry.CountryCode);
+      const { latitude, longitude } = coords;
+      map.flyTo([latitude, longitude], 5);
+    }
+    return null;
+  }
 
   useEffect(() => {
     async function fetchData() {
@@ -40,19 +63,23 @@ const Map = props => {
             const coords = countriesCoords
               .find(coordsElem => coordsElem.alpha2 === summaryElem.CountryCode);
             if (!coords) return '';
-            const { latitude, longitude, numeric } = coords;
+            const {
+              latitude, longitude, numeric, alpha2,
+            } = coords;
             return (
               <CircleMarker
                 center={[latitude, longitude]}
                 pathOptions={fillRedOptions}
                 radius={calcCircleRadius(summaryElem.TotalConfirmed)}
                 key={numeric}
+                className={`${alpha2}`}
               >
-                <Tooltip>{`${summaryElem.Country}: ${summaryElem.TotalConfirmed}`}</Tooltip>
+                <Tooltip>{`${summaryElem.Country}: ${summaryElem.TotalConfirmed} cases`}</Tooltip>
               </CircleMarker>
             );
           })}
         </LayerGroup>
+        <LocationMarker />
       </MapContainer>
     </div>
   );
