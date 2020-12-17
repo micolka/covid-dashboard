@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 import styles from '@/assets/stylesheets/stats.scss';
 import ToggleSwitch from '@/components/Switch/Switch';
 
+import { per100th } from './constants';
+
 const Stats = props => {
   const [checked, setChecked] = useState(false);
   const { summary } = props;
-  const [isFormatted, setState] = useState(false);
   const [totalConfirmed, setTotalConfirmed] = useState(summary.Global.TotalConfirmed);
   const [totalDeaths, setTotalDeaths] = useState(summary.Global.TotalDeaths);
   const [totalRecovered, setTotalRecovered] = useState(summary.Global.TotalRecovered);
@@ -15,14 +16,12 @@ const Stats = props => {
   const [newRecovered, setNewRecovered] = useState(summary.Global.NewRecovered);
 
   function recalculate() {
-    setTotalConfirmed(Math.round(totalConfirmed / 7827));
-    setTotalDeaths(Math.round(totalDeaths / 7827));
-    setTotalRecovered(Math.round(totalRecovered / 7827));
-    setNewConfirmed(Math.round(newConfirmed / 7827));
-    setNewDeaths(Math.round(newDeaths / 7827));
-    setNewRecovered(Math.round(newRecovered / 7827));
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    if (isFormatted === false)isFormatted.setState(true);
+    setTotalConfirmed(Math.round(totalConfirmed / per100th));
+    setTotalDeaths(Math.round(totalDeaths / per100th));
+    setTotalRecovered(Math.round(totalRecovered / per100th));
+    setNewConfirmed(Math.round(newConfirmed / per100th));
+    setNewDeaths(Math.round(newDeaths / per100th));
+    setNewRecovered(Math.round(newRecovered / per100th));
   }
 
   const confirmed = checked ? totalConfirmed : newConfirmed;
