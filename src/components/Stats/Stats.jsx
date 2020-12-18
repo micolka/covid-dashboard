@@ -8,50 +8,59 @@ import { per100th } from './constants';
 const Stats = props => {
   const [checked, setChecked] = useState(false);
   const { summary } = props;
-  const [totalConfirmed, setTotalConfirmed] = useState(summary.Global.TotalConfirmed);
-  const [totalDeaths, setTotalDeaths] = useState(summary.Global.TotalDeaths);
-  const [totalRecovered, setTotalRecovered] = useState(summary.Global.TotalRecovered);
-  const [newConfirmed, setNewConfirmed] = useState(summary.Global.NewConfirmed);
-  const [newDeaths, setNewDeaths] = useState(summary.Global.NewDeaths);
-  const [newRecovered, setNewRecovered] = useState(summary.Global.NewRecovered);
+  const totalConfirmed = summary.Global.TotalConfirmed;
+  const totalDeaths = summary.Global.TotalDeaths;
+  const totalRecovered = summary.Global.TotalRecovered;
+  const newConfirmed = summary.Global.NewConfirmed;
+  const newDeaths = summary.Global.NewDeaths;
+  const newRecovered = summary.Global.NewRecovered;
 
-  function recalculate() {
-    setTotalConfirmed(Math.round(totalConfirmed / per100th));
-    setTotalDeaths(Math.round(totalDeaths / per100th));
-    setTotalRecovered(Math.round(totalRecovered / per100th));
-    setNewConfirmed(Math.round(newConfirmed / per100th));
-    setNewDeaths(Math.round(newDeaths / per100th));
-    setNewRecovered(Math.round(newRecovered / per100th));
+  function recalculatePer100th(digit) {
+    return Math.round(digit / per100th);
   }
 
-  const confirmed = checked ? totalConfirmed : newConfirmed;
-  const deaths = checked ? totalDeaths : newDeaths;
-  const recovered = checked ? totalRecovered : newRecovered;
+  const [show, setShow] = useState(false);
+  const handleClick = () => {
+    setShow(!show);
+  };
+
+  let confirmed = checked ? totalConfirmed : newConfirmed;
+  let deaths = checked ? totalDeaths : newDeaths;
+  let recovered = checked ? totalRecovered : newRecovered;
+  let buttonText = 'per 100 th';
   const title = checked ? 'For all the time' : 'For one day';
+
+  if (show) {
+    confirmed = recalculatePer100th(confirmed);
+    deaths = recalculatePer100th(deaths);
+    recovered = recalculatePer100th(recovered);
+    buttonText = 'for all';
+  }
 
   return (
     <div className={styles['stats-wrapper']}>
       <h2>Global</h2>
       <ToggleSwitch id="toggleSwitch" checked={checked} onChange={setChecked} />
       <div className={styles['stats-table']}>
-        <div className={styles['stats-global-total-date']}>
-          <h3>{title}</h3>
-          <h4>Confirmed</h4>
-          <p>
-            {confirmed}
-          </p>
-          <h4>Deaths</h4>
-          <p>
-            {deaths}
-          </p>
-          <h4>Recovered</h4>
-          <p>
-            {recovered}
-          </p>
+        <div className={styles['stats-date-container']}>
+          <h3 className={styles['stats-title']}>{title}</h3>
+          <h4 className={styles['stats-data-title']}>
+            Confirmed:
+            <span className={styles['stats-data']}>{confirmed}</span>
+          </h4>
+          <h4 className={styles['stats-data-title']}>
+            Deaths:
+            <span className={styles['stats-data']}>{deaths}</span>
+          </h4>
+          <h4 className={styles['stats-data-title']}>
+            Recovered:
+            <span className={styles['stats-data']}>{recovered}</span>
+          </h4>
         </div>
       </div>
-      {/* eslint-disable-next-line react/button-has-type */}
-      <button onClick={recalculate} className={styles['button-recalculate']}>per 100th population</button>
+      <button type="button" onClick={handleClick} className={styles['button-recalculate']}>
+        {buttonText}
+      </button>
     </div>
   );
 };
