@@ -10,7 +10,7 @@ import { getSummary, getPopulation } from './API/API';
 import styles from './assets/stylesheets/index.scss';
 import MainPreloader from './components/Preloaders/MainPreloader';
 import { appInitialState } from './core/config';
-import { ContextApp, initialState, testReducer } from './core/reducer';
+import { ContextApp, initialReducerState, appReducer } from './core/reducer';
 
 function updateSummaryData(Countries, populationData) {
   return Countries.map(summaryElem => {
@@ -23,7 +23,7 @@ function updateSummaryData(Countries, populationData) {
 const App = () => {
   const [summary, setSummary] = useState(appInitialState);
   const [isLoading, setLoading] = useState(true);
-  const [state, dispatch] = useReducer(testReducer, initialState);
+  const [state, dispatch] = useReducer(appReducer, initialReducerState);
 
   useEffect(() => {
     async function fetchData() {
