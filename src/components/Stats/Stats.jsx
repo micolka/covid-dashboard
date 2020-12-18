@@ -8,12 +8,12 @@ import { per100th } from './constants';
 const Stats = props => {
   const [checked, setChecked] = useState(false);
   const { summary } = props;
-  const [totalConfirmed, setTotalConfirmed] = useState(summary.Global.TotalConfirmed);
-  const [totalDeaths, setTotalDeaths] = useState(summary.Global.TotalDeaths);
-  const [totalRecovered, setTotalRecovered] = useState(summary.Global.TotalRecovered);
-  const [newConfirmed, setNewConfirmed] = useState(summary.Global.NewConfirmed);
-  const [newDeaths, setNewDeaths] = useState(summary.Global.NewDeaths);
-  const [newRecovered, setNewRecovered] = useState(summary.Global.NewRecovered);
+  const totalConfirmed = summary.Global.TotalConfirmed;
+  const totalDeaths = summary.Global.TotalDeaths;
+  const totalRecovered = summary.Global.TotalRecovered;
+  const newConfirmed = summary.Global.NewConfirmed;
+  const newDeaths = summary.Global.NewDeaths;
+  const newRecovered = summary.Global.NewRecovered;
 
   function recalculatePer100th(digit) {
     return Math.round(digit / per100th);
