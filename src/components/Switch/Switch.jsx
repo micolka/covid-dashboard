@@ -2,8 +2,7 @@ import React from 'react';
 
 import styles from '@/assets/stylesheets/switch.scss';
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const ToggleSwitch = ({ checked, onChange }) => (
+const ToggleSwitch = ({ onChange }) => (
   <div className={styles['toggle-switch']}>
     <input
       type="checkbox"

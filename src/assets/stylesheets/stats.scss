@@ -10,5 +10,11 @@
   .stats-table {
     display: flex;
     justify-content: space-between;
+    .stats-title, .stats-data-title{
+      margin: 1em 0;
+    }
+    .stats-data{
+      margin: 0 .5em;
+    }
   }
 }
