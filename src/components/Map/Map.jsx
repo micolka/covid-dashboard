@@ -1,17 +1,18 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import {
   MapContainer, LayerGroup, CircleMarker, TileLayer, Tooltip, useMapEvents,
 } from 'react-leaflet';
 
-import { getCountriesCoords } from '@/API/API';
 import styles from '@/assets/stylesheets/map.scss';
 import { calcCircleRadius } from '@/components/Map/utils';
 import { ContextApp } from '@/core/reducer';
 
+import countriesCoords from './coordinates';
+
 const Map = props => {
   const { summary } = props;
-  const [countriesCoords, setCountriesCoords] = useState('');
-  const [isLoading, setLoading] = useState(true);
+  // const [countriesCoords, setCountriesCoords] = useState('');
+  // const [isLoading, setLoading] = useState(true);
   const { state, dispatch } = useContext(ContextApp);
   const fillRedOptions = { fillColor: 'red', stroke: false, fillOpacity: 0.5 };
 
@@ -40,16 +41,16 @@ const Map = props => {
     return null;
   }
 
-  useEffect(() => {
-    async function fetchData() {
-      const data = await getCountriesCoords();
-      setCountriesCoords(data);
-      setLoading(false);
-    }
-    if (isLoading) fetchData();
-  }, [isLoading]);
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     const data = await getCountriesCoords();
+  //     setCountriesCoords(data);
+  //     setLoading(false);
+  //   }
+  //   if (isLoading) fetchData();
+  // }, [isLoading]);
 
-  if (isLoading) return <div>preloader</div>;
+  // if (isLoading) return <div>preloader</div>;
 
   return (
     <div className={styles['map-wrapper']}>
