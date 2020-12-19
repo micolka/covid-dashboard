@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useContext} from 'react';
 
 import styles from '@/assets/stylesheets/table.scss';
-
 import { selectors } from './Constants';
+import { ContextApp } from '@/core/reducer';
 
 const Table = props => {
   const [numSelector, setNumSelector] = useState(0);
   const [value, setValue] = useState('');
+  const { state, dispatch } = useContext(ContextApp);
 
   let sum = props.summary.Countries;
   const nameSelector = selectors[numSelector];
@@ -41,7 +42,10 @@ const Table = props => {
 
   const selectedCountry = e => {
     const countryName = e.target.innerHTML;
-    return sum.find(el => el.Country === countryName);
+    dispatch({
+      type: 'SET-CURRENT-COUNTRY',
+      payload: sum.find(el => el.Country === countryName)
+    });
   };
 
   return (
@@ -64,7 +68,7 @@ const Table = props => {
               <span onClick={selectedCountry} className={styles.countries}>{el.Country}</span>
               {numSelector <= 5
                 ? <span className={styles.countriesValue}>{el[nameSelector]}</span>
-                : <span className={styles.countriesValue}>{(el[selectors[numSelector % 6]] / (el.population * per100K)).toFixed(3)}</span>}
+                : <span className={styles.countriesValue}>{(el[selectors[numSelector % 6]] / el.population * per100K).toFixed(3)}</span>}
             </div>
           ))}
         </div>

@@ -13,8 +13,19 @@
 
   grid-area: table;
   text-align: center;
-  overflow-y: auto;
+  overflow-y: scroll;
   min-height: 100%;
+  padding-right: 5px;
+  padding-left: 5px;
+}
+
+.table-wrapper::-webkit-scrollbar {
+  width: 12px;
+}
+
+.table-wrapper::-webkit-scrollbar-thumb {
+  background:red;
+  border-radius: 10px;
 }
 
 .container {
@@ -38,6 +49,7 @@
 .findArea {
   width: 60%;
   background: rgb(165, 147, 147);
+  outline: none;
 }
 
 .selectors {
