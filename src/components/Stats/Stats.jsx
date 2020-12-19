@@ -1,19 +1,31 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 
 import styles from '@/assets/stylesheets/stats.scss';
 import ToggleSwitch from '@/components/Switch/Switch';
+import { ContextApp } from '@/core/reducer';
 
 import { per100th } from './constants';
 
 const Stats = props => {
   const [checked, setChecked] = useState(false);
   const { summary } = props;
-  const totalConfirmed = summary.Global.TotalConfirmed;
-  const totalDeaths = summary.Global.TotalDeaths;
-  const totalRecovered = summary.Global.TotalRecovered;
-  const newConfirmed = summary.Global.NewConfirmed;
-  const newDeaths = summary.Global.NewDeaths;
-  const newRecovered = summary.Global.NewRecovered;
+  const { state, dispatch } = useContext(ContextApp);
+  let country = 'Global';
+  let totalConfirmed = summary.Global.TotalConfirmed;
+  let totalDeaths = summary.Global.TotalDeaths;
+  let totalRecovered = summary.Global.TotalRecovered;
+  let newConfirmed = summary.Global.NewConfirmed;
+  let newDeaths = summary.Global.NewDeaths;
+  let newRecovered = summary.Global.NewRecovered;
+  if (state.currentCountry) {
+    country = state.currentCountry.Country;
+    totalConfirmed = state.currentCountry.TotalConfirmed;
+    totalDeaths = state.currentCountry.TotalDeaths;
+    totalRecovered = state.currentCountry.TotalRecovered;
+    newConfirmed = state.currentCountry.NewConfirmed;
+    newDeaths = state.currentCountry.NewDeaths;
+    newRecovered = state.currentCountry.NewRecovered;
+  }
 
   function recalculatePer100th(digit) {
     return Math.round(digit / per100th);
@@ -39,7 +51,7 @@ const Stats = props => {
 
   return (
     <div className={styles['stats-wrapper']}>
-      <h2>Global</h2>
+      <h2 className={styles['stats-country']}>{country}</h2>
       <ToggleSwitch id="toggleSwitch" checked={checked} onChange={setChecked} />
       <div className={styles['stats-table']}>
         <div className={styles['stats-date-container']}>
