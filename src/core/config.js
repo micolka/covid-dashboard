@@ -12,4 +12,11 @@ export const appInitialState = {
   Date: '',
 };
 
-export const anotherConst = '';
+export const displayParams = {
+  NewConfirmed: 'NewConfirmed',
+  NewDeaths: 'NewDeaths',
+  NewRecovered: 'NewRecovered',
+  TotalConfirmed: 'TotalConfirmed',
+  TotalDeaths: 'TotalDeaths',
+  TotalRecovered: 'TotalRecovered',
+};

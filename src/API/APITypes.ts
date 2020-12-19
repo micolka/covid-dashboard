@@ -72,12 +72,3 @@ export type TPopulation = {
   population: number;
   alpha2Code: string;
 };
-
-export type TCountryCoords = {
-  name: string;
-  alpha2: string;
-  alpha3: string;
-  numeric: string;
-  latitude: number;
-  longitude: number;
-};

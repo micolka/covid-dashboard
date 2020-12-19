@@ -1,4 +1,4 @@
-const countriesCoords = [
+export const countriesCoords = [
   {
     name: 'Afghanistan',
     alpha2: 'AF',
@@ -1681,4 +1681,15 @@ const countriesCoords = [
   },
 ];
 
-export default countriesCoords;
+export const tileLayerURLs = [
+  { name: 'Stadia Maps', url: 'https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png', href: 'https://stadiamaps.com' },
+  { name: 'OpenStreetMap', url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', href: 'http://osm.org/copyright' },
+  { name: 'Thunderforest spinal-map', url: 'https://{s}.tile.thunderforest.com/spinal-map/{z}/{x}/{y}.png', href: 'http://www.thunderforest.com/' },
+  { name: 'OpenTopoMap', url: 'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', href: 'https://opentopomap.org' },
+  { name: 'Thunderforest transport-dark', url: 'https://{s}.tile.thunderforest.com/transport-dark/{z}/{x}/{y}.png', href: 'https://thunderforest.org' },
+  { name: 'Stamen Design', url: 'https://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}{r}.png', href: 'http://stamen.com' },
+  { name: 'National Geographic, Esri', url: 'https://server.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer/tile/{z}/{y}/{x}', href: 'http://arcgisonline.com' },
+  { name: 'Global Imagery Browse Service/NASA', url: 'https://map1.vis.earthdata.nasa.gov/wmts-webmerc/VIIRS_CityLights_2012/default/GoogleMapsCompatible_Level8/{z}/{y}/{x}.jpg', href: 'http://earthdata.nasa.gov' },
+  { name: 'U.S. Geological Survey', url: 'https://basemap.nationalmap.gov/arcgis/rest/services/USGSImageryTopo/MapServer/tile/{z}/{y}/{x}', href: 'http://usgs.gov' },
+  { name: 'Geoportail France', url: 'https://wxs.ign.fr/choisirgeoportail/geoportail/wmts?REQUEST=GetTile&SERVICE=WMTS&VERSION=1.0.0&STYLE=normal&TILEMATRIXSET=PM&FORMAT=image/jpeg&LAYER=ORTHOIMAGERY.ORTHOPHOTOS&TILEMATRIX={z}&TILEROW={y}&TILECOL={x}', href: 'http://geoportail.gouv.fr' },
+];
