@@ -16,7 +16,6 @@ import { countriesCoords, tileLayerURLs } from './mapConstants';
 const Map = props => {
   const { summary } = props;
   const { TotalConfirmed, TotalDeaths, TotalRecovered } = displayParams;
-
   const [tileLayerParams, setTileLayerParams] = useState(tileLayerURLs[0]);
 
   const [isLayerChanged, setLayerChanged] = useState(true);
