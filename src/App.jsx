@@ -44,12 +44,12 @@ const App = () => {
 
   return (
     <div className={styles['app-wrapper']}>
-      {
+      {/* {
         isLoading ? (
           <div className={styles['preloader-wrapper']}>
             <MainPreloader />
           </div>
-        ) : (
+        ) : ( */}
           <React.Fragment>
             <ContextApp.Provider value={{ dispatch, state }}>
               <Header />
@@ -60,8 +60,8 @@ const App = () => {
               <Footer />
             </ContextApp.Provider>
           </React.Fragment>
-        )
-      }
+        {/* )
+      } */}
     </div>
   );
 };

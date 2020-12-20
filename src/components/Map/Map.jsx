@@ -54,6 +54,13 @@ const Map = props => {
     setMenuOpened(!isMenuOpened);
   }
 
+  function toggleFullScreen() {
+    dispatch({
+      type: 'TOGGLE-FULLSCREEN-MODE',
+      payload: { map: !state.fullscreen.map },
+    });
+  }
+
   function selectTileLayer(e) {
     const tileLayer = tileLayerURLs.find(layer => layer.name === e.target.id);
     setTileLayerParams(tileLayer);
@@ -87,7 +94,8 @@ const Map = props => {
   return (
     <div className={styles['map-wrapper']}>
       {isLayerChanged && (
-      <React.Fragment>
+      <div className={styles['map-container_wrapper']}>
+        <div onClick={toggleFullScreen} className={styles.fullScreenButton}>123</div>
         <MapContainer center={[53.71, 27.95]} zoom={4} minZoom={2} scrollWheelZoom>
           <TileLayer
             attribution={`&copy; <a href="${tileLayerParams.href}">${tileLayerParams.name}</a> contributors`}
@@ -116,7 +124,7 @@ const Map = props => {
           </LayerGroup>
           <LocationMarker />
         </MapContainer>
-      </React.Fragment>
+      </div>
       )}
       <div onClick={selectTileLayer} className={classNames(styles['maps_list-menu'], isMenuOpened ? styles['maps_list-active'] : '')}>
         {isMenuOpened
