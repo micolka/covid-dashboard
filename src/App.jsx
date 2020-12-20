@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useReducer } from 'react';
 
 import Footer from '@/components/Footer/Footer';
+import Graph from '@/components/Graph/Graph';
 import Header from '@/components/Header/Header';
 import Map from '@/components/Map/Map';
 import Stats from '@/components/Stats/Stats';
@@ -54,6 +55,7 @@ const App = () => {
               <Header />
               <Map summary={summary} />
               <Stats summary={summary} />
+              <Graph summary={summary} />
               <Table summary={summary} />
               <Footer />
             </ContextApp.Provider>

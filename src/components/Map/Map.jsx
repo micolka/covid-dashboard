@@ -7,22 +7,22 @@ import {
 } from 'react-leaflet';
 
 import styles from '@/assets/stylesheets/map.scss';
-import { calcCircleRadius } from '@/components/Map/utils';
 import { displayParams } from '@/core/config';
 import { ContextApp } from '@/core/reducer';
+import { calcCircleRadius } from '@/core/utils';
 
 import { countriesCoords, tileLayerURLs } from './mapConstants';
 
 const Map = props => {
   const { summary } = props;
   const { TotalConfirmed, TotalDeaths, TotalRecovered } = displayParams;
-  const [currentParam, setCurrentParam] = useState(TotalConfirmed);
   const [tileLayerParams, setTileLayerParams] = useState(tileLayerURLs[0]);
 
   const [isLayerChanged, setLayerChanged] = useState(true);
   const [isMenuOpened, setMenuOpened] = useState(false);
 
   const { state, dispatch } = useContext(ContextApp);
+  const currentParam = state.currentStat;
   const fillRedOptions = { fillColor: 'red', stroke: false, fillOpacity: 0.5 };
   const fillCurrentOptions = {
     fillColor: 'red', stroke: true, fillOpacity: 1, color: 'blue', weight: 2,
@@ -42,7 +42,10 @@ const Map = props => {
   }
 
   function selectParamToDisplay(e) {
-    setCurrentParam(e.target.id);
+    dispatch({
+      type: 'SET-DISPLAY-STAT',
+      payload: e.target.id,
+    });
   }
 
   function toggleTileSelectorMenu() {
@@ -85,7 +88,7 @@ const Map = props => {
     <div className={styles['map-wrapper']}>
       {isLayerChanged && (
       <React.Fragment>
-        <MapContainer center={[53.71, 27.95]} zoom={4} scrollWheelZoom>
+        <MapContainer center={[53.71, 27.95]} zoom={4} minZoom={2} scrollWheelZoom>
           <TileLayer
             attribution={`&copy; <a href="${tileLayerParams.href}">${tileLayerParams.name}</a> contributors`}
             url={tileLayerParams.url}
