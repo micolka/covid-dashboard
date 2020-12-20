@@ -72,3 +72,10 @@ export type TPopulation = {
   population: number;
   alpha2Code: string;
 };
+
+export type TTimeline = {
+  last_update: string;
+  total_cases: number;
+  total_deaths: number;
+  total_recovered: number;
+};

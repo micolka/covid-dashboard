@@ -1,9 +1,16 @@
 import React from 'react';
 
+import { displayParams } from '@/core/config';
+
 export const ContextApp = React.createContext();
+
+const { TotalConfirmed } = displayParams;
 
 export const initialReducerState = {
   currentCountry: null,
+  currentStat: TotalConfirmed,
+  per100k: false,
+  allTime: true,
 };
 
 export const appReducer = (state, action) => {
@@ -12,6 +19,11 @@ export const appReducer = (state, action) => {
       return {
         ...state,
         currentCountry: action.payload,
+      };
+    case 'SET-DISPLAY-STAT':
+      return {
+        ...state,
+        currentStat: action.payload,
       };
     default:
       return state;

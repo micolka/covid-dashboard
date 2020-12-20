@@ -1,9 +1,10 @@
 import {
-  TCountry, TAllStatus, TSummary, TGlobal, TWorldTotalWIP, TPopulation,
+  TCountry, TAllStatus, TSummary, TTimeline, TWorldTotalWIP, TPopulation,
 } from './APITypes';
 
 export const API = {
   URL: 'https://api.covid19api.com',
+  URL1: 'https://covid19-api.org/api/timeline',
   URLCountries: 'https://restcountries.eu/rest/v2/all?fields=name;population;alpha2Code',
   ENDPOINTS: {
     ALL: 'all',
@@ -57,12 +58,10 @@ export const getByCountryAllStatus = async (
   return (await response.json()) as TAllStatus[];
 };
 
-export const getWorldWIP = async (from: string, to: string): Promise<TGlobal[]> => {
-  const { URL, ENDPOINTS } = API;
-  const { WORLD } = ENDPOINTS;
-
-  const response = await fetch(`${URL}/${WORLD}?from=${from}&to=${to}`);
-  return (await response.json()) as TGlobal[];
+export const getWorldTimeline = async (): Promise<TTimeline[]> => {
+  const { URL1 } = API;
+  const response = await fetch(`${URL1}`);
+  return (await response.json()) as TTimeline[];
 };
 
 export const getWorldTotalWIP = async (): Promise<TWorldTotalWIP> => {

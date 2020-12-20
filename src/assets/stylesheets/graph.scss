@@ -1,0 +1,9 @@
+@charset "UTF-8";
+
+@import 'variables';
+@import 'mixins';
+
+.graph-wrapper {
+  @include wrapper-props;
+  grid-area: graph;
+}
