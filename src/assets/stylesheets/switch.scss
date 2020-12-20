@@ -1,3 +1,5 @@
+@import 'variables';
+
 .toggle-switch {
   position: relative;
   width: 75px;
@@ -40,7 +42,7 @@
       content: 'total';
       text-transform: uppercase;
       padding-left: 10px;
-      background-color: #f90;
+      background-color: $text-red-color;
       color: #fff;
     }
   }

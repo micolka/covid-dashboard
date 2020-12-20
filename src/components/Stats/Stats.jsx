@@ -10,22 +10,16 @@ const Stats = props => {
   const [checked, setChecked] = useState(false);
   const { summary } = props;
   const { state, dispatch } = useContext(ContextApp);
-  let country = 'Global';
-  let totalConfirmed = summary.Global.TotalConfirmed;
-  let totalDeaths = summary.Global.TotalDeaths;
-  let totalRecovered = summary.Global.TotalRecovered;
-  let newConfirmed = summary.Global.NewConfirmed;
-  let newDeaths = summary.Global.NewDeaths;
-  let newRecovered = summary.Global.NewRecovered;
-  if (state.currentCountry) {
-    country = state.currentCountry.Country;
-    totalConfirmed = state.currentCountry.TotalConfirmed;
-    totalDeaths = state.currentCountry.TotalDeaths;
-    totalRecovered = state.currentCountry.TotalRecovered;
-    newConfirmed = state.currentCountry.NewConfirmed;
-    newDeaths = state.currentCountry.NewDeaths;
-    newRecovered = state.currentCountry.NewRecovered;
-  }
+  const curCountry = state.currentCountry || {};
+  const global = summary.Global || {};
+  const countryCode = curCountry.CountryCode || '';
+  const country = curCountry.Country || 'Global';
+  const totalConfirmed = curCountry.TotalConfirmed || global.TotalConfirmed;
+  const totalDeaths = curCountry.TotalDeaths || global.TotalDeaths;
+  const totalRecovered = curCountry.TotalRecovered || global.TotalRecovered;
+  const newConfirmed = curCountry.NewConfirmed || global.NewConfirmed;
+  const newDeaths = curCountry.NewDeaths || global.NewDeaths;
+  const newRecovered = curCountry.NewRecovered || global.NewRecovered;
 
   function recalculatePer100th(digit) {
     return Math.round(digit / per100th);
@@ -48,11 +42,14 @@ const Stats = props => {
     recovered = recalculatePer100th(recovered);
     buttonText = 'for all';
   }
+  const flag = countryCode ? (<img className={styles['stats-flag-img']} alt="flag" src={`https://www.countryflags.io/${countryCode.toLowerCase()}/flat/16.png`} />) : '';
 
   return (
     <div className={styles['stats-wrapper']}>
-      <h2 className={styles['stats-country']}>{country}</h2>
-      <ToggleSwitch id="toggleSwitch" checked={checked} onChange={setChecked} />
+      <div className={styles['stats-main-title']}>
+        <h2 className={styles['stats-country']}>{country}</h2>
+        {flag}
+      </div>
       <div className={styles['stats-table']}>
         <div className={styles['stats-date-container']}>
           <h3 className={styles['stats-title']}>{title}</h3>
@@ -70,6 +67,7 @@ const Stats = props => {
           </h4>
         </div>
       </div>
+      <ToggleSwitch id="toggleSwitch" checked={checked} onChange={setChecked} />
       <button type="button" onClick={handleClick} className={styles['button-recalculate']}>
         {buttonText}
       </button>
