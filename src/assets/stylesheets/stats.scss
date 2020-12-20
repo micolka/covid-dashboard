@@ -7,6 +7,15 @@
   @include wrapper-props;
   grid-area: stats;
   padding: 1em;
+  .stats-main-title{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    .stats-flag-img{
+      width: 1.5em;
+      height: 1em;
+    }
+  }
   .stats-table {
     display: flex;
     justify-content: space-between;
