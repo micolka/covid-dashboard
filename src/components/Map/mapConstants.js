@@ -1682,7 +1682,7 @@ export const countriesCoords = [
 ];
 
 export const tileLayerURLs = [
-  { name: 'Stadia Maps', url: 'https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png', href: 'https://stadiamaps.com' },
+  { name: 'CARTO Dark Matter with labels', url: 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', href: 'https://carto.com/' },
   { name: 'OpenStreetMap', url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', href: 'http://osm.org/copyright' },
   { name: 'Thunderforest spinal-map', url: 'https://{s}.tile.thunderforest.com/spinal-map/{z}/{x}/{y}.png', href: 'http://www.thunderforest.com/' },
   { name: 'OpenTopoMap', url: 'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', href: 'https://opentopomap.org' },

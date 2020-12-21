@@ -29,3 +29,41 @@ export function calcCircleRadius(cases) {
 export function theOtherOne() {
   return 0;
 }
+
+export function updateSummaryData(Countries, populationData) {
+  return Countries.map(summaryElem => {
+    const country = populationData
+      .find(populationElem => populationElem.alpha2Code === summaryElem.CountryCode);
+    return { ...summaryElem, population: country.population };
+  });
+}
+
+export function formatSummaryData(dataAll, dataCountries) {
+  const data = {
+    Message: '',
+    Global: {
+      NewConfirmed: dataAll.todayCases,
+      TotalConfirmed: dataAll.cases,
+      NewDeaths: dataAll.todayDeaths,
+      TotalDeaths: dataAll.deaths,
+      NewRecovered: dataAll.todayRecovered,
+      TotalRecovered: dataAll.recovered,
+    },
+    Countries: dataCountries.map(elem => ({
+      Country: elem.country,
+      CountryCode: elem.countryInfo.iso2,
+      Slug: elem.countryInfo.iso3,
+      NewConfirmed: elem.todayCases,
+      TotalConfirmed: elem.cases,
+      NewDeaths: elem.todayDeaths,
+      TotalDeaths: elem.deaths,
+      NewRecovered: elem.todayRecovered,
+      TotalRecovered: elem.recovered,
+      Date: new Date(elem.updated).toISOString(),
+      Premium: {
+      },
+    })).filter(elem => elem.CountryCode !== null),
+    Date: new Date(dataAll.updated).toISOString(),
+  };
+  return data;
+}

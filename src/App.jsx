@@ -7,19 +7,14 @@ import Map from '@/components/Map/Map';
 import Stats from '@/components/Stats/Stats';
 import Table from '@/components/Table/Table';
 
-import { getSummary, getPopulation } from './API/API';
+import {
+  getSummary, getPopulation, getDiseaseAll, getDiseaseCountries,
+} from './API/API';
 import styles from './assets/stylesheets/index.scss';
 import MainPreloader from './components/Preloaders/MainPreloader';
 import { appInitialState } from './core/config';
 import { ContextApp, initialReducerState, appReducer } from './core/reducer';
-
-function updateSummaryData(Countries, populationData) {
-  return Countries.map(summaryElem => {
-    const country = populationData
-      .find(populationElem => populationElem.alpha2Code === summaryElem.CountryCode);
-    return { ...summaryElem, population: country.population };
-  });
-}
+import { updateSummaryData, formatSummaryData } from './core/utils';
 
 const App = () => {
   const [summary, setSummary] = useState(appInitialState);
@@ -28,12 +23,18 @@ const App = () => {
 
   useEffect(() => {
     async function fetchData() {
-      const summaryData = await getSummary();
-      const populationData = await getPopulation();
-      setSummary({
-        ...summaryData,
-        Countries: updateSummaryData(summaryData.Countries, populationData),
-      });
+      try {
+        const summaryData = await getSummary();
+        const populationData = await getPopulation();
+        setSummary({
+          ...summaryData,
+          Countries: updateSummaryData(summaryData.Countries, populationData),
+        });
+      } catch (e) {
+        const diseaseAllData = await getDiseaseAll();
+        const diseaseCountriesData = await getDiseaseCountries();
+        setSummary(formatSummaryData(diseaseAllData, diseaseCountriesData));
+      }
       setLoading(false);
     }
 
@@ -44,12 +45,12 @@ const App = () => {
 
   return (
     <div className={styles['app-wrapper']}>
-      {/* {
+      {
         isLoading ? (
           <div className={styles['preloader-wrapper']}>
             <MainPreloader />
           </div>
-        ) : ( */}
+        ) : (
           <React.Fragment>
             <ContextApp.Provider value={{ dispatch, state }}>
               <Header />
@@ -60,8 +61,8 @@ const App = () => {
               <Footer />
             </ContextApp.Provider>
           </React.Fragment>
-        {/* )
-      } */}
+        )
+      }
     </div>
   );
 };
