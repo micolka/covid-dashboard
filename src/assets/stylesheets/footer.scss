@@ -13,7 +13,7 @@
     align-items: center;
     .footer-RSLogo{
       width: 6em;
-      fill: $grey-logo;
+      fill: $white;
     }
   }
   .footer-link-container{
@@ -36,6 +36,7 @@
   }
   .footer-GHLogo{
     width: 1.5em;
+    margin-right: .5em;
   }
 
   grid-area: footer;

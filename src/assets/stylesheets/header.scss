@@ -4,6 +4,15 @@
 
 .header-wrapper {
   @include wrapper-props;
-
+  display: flex;
+  align-items: center;
+  padding: 1em;
+  .header-logo{
+    padding-left: .5em;
+    width: 3em;
+  }
+  .header-title{
+    color: $text-yellow-color;
+  }
   grid-area: header;
 }
