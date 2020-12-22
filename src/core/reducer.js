@@ -12,26 +12,30 @@ export const initialReducerState = {
   per100k: false,
   allTime: true,
   fullscreen: {
-    table: false,
-    map: false,
-    stats: false,
-    graph: false,
+    tableF: false,
+    mapF: false,
+    statsF: false,
+    graphF: false,
   },
 };
 
 export const appReducer = (state, action) => {
   switch (action.type) {
-    case 'SET-PER100K-STATS':
+    case 'SET-PER100K-STAT':
       return {
         ...state,
         per100k: !state.per100k,
+      };
+    case 'SET-ALLTIME-STAT':
+      return {
+        ...state,
+        allTime: !state.allTime,
       };
     case 'SET-CURRENT-COUNTRY':
       return {
         ...state,
         currentCountry: action.payload,
       };
-
     case 'SET-DISPLAY-STAT':
       return {
         ...state,

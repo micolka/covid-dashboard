@@ -5,6 +5,7 @@
 
 .stats-wrapper {
   @include wrapper-props;
+  @include fullscreen-btn;
   grid-area: stats;
   padding: 1em;
   display: flex;
@@ -53,4 +54,8 @@
       color: $text-red-color;
     }
   }
+}
+
+.hide-stats {
+  display: none;
 }

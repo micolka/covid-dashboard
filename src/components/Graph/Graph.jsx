@@ -1,3 +1,6 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+import classNames from 'classnames';
 import React, { useState, useContext, useEffect } from 'react';
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
@@ -13,6 +16,9 @@ const Graph = () => {
   const [graphData, setGraphData] = useState(null);
   const [globalData, setGlobalData] = useState(null);
   const { TotalConfirmed, TotalDeaths, TotalRecovered } = displayParams;
+  const {
+    statsF, tableF, mapF, graphF,
+  } = state.fullscreen;
 
   async function getCountryDataForAllTime() {
     let response = await getDayOneTotalAllStatus(state.currentCountry.Country);
@@ -55,6 +61,13 @@ const Graph = () => {
     }
   }
 
+  function toggleFullScreen() {
+    dispatch({
+      type: 'TOGGLE-FULLSCREEN-MODE',
+      payload: { graphF: !state.fullscreen.graphF },
+    });
+  }
+
   useEffect(() => {
     if (state.currentCountry) {
       getCountryDataForAllTime();
@@ -66,24 +79,29 @@ const Graph = () => {
   }, [state]);
 
   return (
-    <div className={styles['graph-wrapper']}>
-      <BarChart
-        width={500}
-        height={400}
-        data={graphData}
-        margin={{
-          top: 20, right: 30, left: 20, bottom: 5,
-        }}
-      >
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="Date" />
-        <YAxis />
-        <Tooltip />
-        <Legend />
-        {state.currentCountry
-          ? (<Bar dataKey={getDataKey()} stackId="a" fill=" #e60000" />)
-          : (<Bar dataKey={getDataKey()} stackId="a" fill="#ffaa00" />)}
-      </BarChart>
+    <div className={classNames(styles['graph-wrapper'], (statsF || tableF || mapF) ? styles['hide-graph'] : '')}>
+      <div className={styles['fullscreen-container_wrapper']}>
+        <div onClick={toggleFullScreen} className={styles.fullScreenButton}>
+          <i className="material-icons">{graphF ? 'fullscreen_exit' : 'fullscreen'}</i>
+        </div>
+        <BarChart
+          width={480}
+          height={400}
+          data={graphData}
+          margin={{
+            top: 20, right: 30, left: 20, bottom: 5,
+          }}
+        >
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="Date" />
+          <YAxis />
+          <Tooltip />
+          <Legend />
+          {state.currentCountry
+            ? (<Bar dataKey={getDataKey()} stackId="a" fill=" #e60000" />)
+            : (<Bar dataKey={getDataKey()} stackId="a" fill="#ffaa00" />)}
+        </BarChart>
+      </div>
     </div>
   );
 };

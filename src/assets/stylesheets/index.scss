@@ -25,3 +25,23 @@
   left: 50%;
   transform: translate(-80%, -60%);
 }
+
+.map_full-screen {
+  grid-template-rows: 60px 1fr 1fr 60px;
+  grid-template-columns: 0 5fr 0;
+}
+
+.stats_full-screen {
+  grid-template-rows: 60px 1fr 0 60px;
+  grid-template-columns: 0 0 1fr;
+}
+
+.table_full-screen {
+  grid-template-rows: 60px 1fr 1fr 60px;
+  grid-template-columns: 2fr 0 0;
+}
+
+.graph_full-screen {
+  grid-template-rows: 60px 0 1fr 60px;
+  grid-template-columns: 0 0 1fr;
+}

@@ -22,6 +22,7 @@ const Map = props => {
   const [isMenuOpened, setMenuOpened] = useState(false);
 
   const { state, dispatch } = useContext(ContextApp);
+  const { statsF, tableF, graphF, mapF } = state.fullscreen;
   const currentParam = state.currentStat;
   const fillRedOptions = { fillColor: 'red', stroke: false, fillOpacity: 0.5 };
   const fillCurrentOptions = {
@@ -47,7 +48,6 @@ const Map = props => {
       payload: e.target.id,
     });
   }
-
   function toggleTileSelectorMenu() {
     const map = document.querySelector('.leaflet-container');
     map.classList.toggle('map-container-small');
@@ -57,8 +57,9 @@ const Map = props => {
   function toggleFullScreen() {
     dispatch({
       type: 'TOGGLE-FULLSCREEN-MODE',
-      payload: { map: !state.fullscreen.map },
+      payload: { mapF: !state.fullscreen.mapF },
     });
+    setLayerChanged(false);
   }
 
   function selectTileLayer(e) {
@@ -92,10 +93,12 @@ const Map = props => {
   });
 
   return (
-    <div className={styles['map-wrapper']}>
+    <div className={classNames(styles['map-wrapper'], (statsF || tableF || graphF) ? styles['hide-map'] : '')}>
       {isLayerChanged && (
-      <div className={styles['map-container_wrapper']}>
-        <div onClick={toggleFullScreen} className={styles.fullScreenButton}>123</div>
+      <div className={styles['fullscreen-container_wrapper']}>
+        <div onClick={toggleFullScreen} className={styles.fullScreenButton}>
+          <i className="material-icons">{mapF ? 'fullscreen_exit' : 'fullscreen'}</i>
+        </div>
         <MapContainer center={[53.71, 27.95]} zoom={4} minZoom={2} scrollWheelZoom>
           <TileLayer
             attribution={`&copy; <a href="${tileLayerParams.href}">${tileLayerParams.name}</a> contributors`}
