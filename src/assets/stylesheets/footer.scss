@@ -5,6 +5,38 @@
 
 .footer-wrapper {
   @include wrapper-props;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 1em;
+  .footer-logo-container{
+    display: flex;
+    align-items: center;
+    .footer-RSLogo{
+      width: 6em;
+      fill: $grey-logo;
+    }
+  }
+  .footer-link-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .footer-link{
+      color: white;
+      text-decoration: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1em;
+      text-transform: uppercase;
+      margin-right: 1em;
+    }
+    .footer-link span:hover{
+      text-shadow: 2px 1px 3px white;
+    }
+  }
+  .footer-GHLogo{
+    width: 1.5em;
+  }
 
   grid-area: footer;
 }

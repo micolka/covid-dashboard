@@ -7,23 +7,50 @@
   @include wrapper-props;
   grid-area: stats;
   padding: 1em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-size: 1.1em;
+  .stats-table{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 40%;
+  }
   .stats-main-title{
     display: flex;
-    justify-content: space-around;
+    justify-content: flex-start;
     align-items: center;
+    margin: 1em 0;
     .stats-flag-img{
       width: 1.5em;
       height: 1em;
+      margin-right: 1em;
     }
+  }
+  .stats-toggle-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 3.3em;
   }
   .stats-table {
     display: flex;
     justify-content: space-between;
     .stats-title, .stats-data-title{
-      margin: 1em 0;
+      margin: .3em 0;
     }
-    .stats-data{
-      margin: 0 .5em;
+    .stats-data-recovered {
+      margin: .5em;
+      color: $text-green-color;
+    }
+    .stats-data-confirmed{
+      margin: .5em;
+      color: $text-yellow-color;
+    }
+    .stats-data-deaths{
+      margin: .5em;
+      color: $text-red-color;
     }
   }
 }
