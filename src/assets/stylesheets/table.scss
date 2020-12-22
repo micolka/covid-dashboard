@@ -10,7 +10,7 @@
 
 .table-wrapper {
   @include wrapper-props;
-
+  @include fullscreen-btn;
   grid-area: table;
   text-align: center;
   overflow-y: scroll;
@@ -68,13 +68,15 @@
   color: #d6d6d6;
 }
 
-.selectors {
-  width: 100%;
-}
+// .selectors {
+//   width: 100%;
+// }
 
 .containerSelectors {
   display: flex;
+  padding: 0 10%;
   align-items: center;
+  justify-content: space-around;
   margin-bottom: 5px;
 }
 
@@ -167,4 +169,8 @@
 
 .keyboard__keydark {
   background: rgba(0, 0, 0, 0.25);
+}
+
+.hide-table {
+  display: none;
 }

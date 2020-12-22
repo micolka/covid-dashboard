@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import React, { useEffect, useState, useReducer } from 'react';
 
 import Footer from '@/components/Footer/Footer';
@@ -20,7 +21,9 @@ const App = () => {
   const [summary, setSummary] = useState(appInitialState);
   const [isLoading, setLoading] = useState(true);
   const [state, dispatch] = useReducer(appReducer, initialReducerState);
-
+  const {
+    statsF, tableF, graphF, mapF,
+  } = state.fullscreen;
   useEffect(() => {
     async function fetchData() {
       try {
@@ -44,7 +47,12 @@ const App = () => {
   }, [isLoading]);
 
   return (
-    <div className={styles['app-wrapper']}>
+    <div className={classNames(styles['app-wrapper'],
+      mapF ? styles['map_full-screen'] : '',
+      statsF ? styles['stats_full-screen'] : '',
+      tableF ? styles['table_full-screen'] : '',
+      graphF ? styles['graph_full-screen'] : '',)}
+    >
       {
         isLoading ? (
           <div className={styles['preloader-wrapper']}>
