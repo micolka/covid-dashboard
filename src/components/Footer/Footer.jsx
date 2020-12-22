@@ -1,6 +1,6 @@
 import React from 'react';
 
-import GHLogoSrc from '@/assets/img/gh-grey.png';
+import GHLogoSrc from '@/assets/img/gh.png';
 import RSLogo from '@/assets/img/rs.svg';
 import styles from '@/assets/stylesheets/footer.scss';
 
