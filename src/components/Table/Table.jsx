@@ -1,6 +1,9 @@
-import React, { useState, useContext} from 'react';
+import React, { useState, useEffect, useContext, } from 'react';
 
+import ArrowRightIcon from '@material-ui/icons/ArrowRight';
+import ArrowLeftIcon from '@material-ui/icons/ArrowLeft';
 import styles from '@/assets/stylesheets/table.scss';
+import { Keyboard } from './keyboard';
 import { selectors } from './Constants';
 import { ContextApp } from '@/core/reducer';
 
@@ -36,36 +39,43 @@ const Table = props => {
   if (numSelector <= 5) {
     sum.sort((a, b) => b[nameSelector] - a[nameSelector]);
   } else {
-    sum.sort((a, b) => (b[selectors[numSelector % 6]] / (b.population * per100K))
-    - (a[selectors[numSelector % 6]] / (a.population * per100K)));
+    sum.sort((a, b) => (b[selectors[numSelector % 6]] / b.population * per100K)
+    - (a[selectors[numSelector % 6]] / a.population * per100K));
   }
 
   const selectedCountry = e => {
-    const countryName = e.target.innerHTML;
+    const countryName = e.target.closest('#countryWrapper').children[0].children[1].innerHTML;
     dispatch({
       type: 'SET-CURRENT-COUNTRY',
       payload: sum.find(el => el.Country === countryName)
     });
   };
 
+  useEffect(() => {
+    Keyboard.init();
+  }, []);
+
   return (
     <div className={styles['table-wrapper']}>
-      <span>Countries</span>
+      <span className={styles.countryHeader}>Countries</span>
       <div className={styles.containerSelectors}>
-        <button type="button" onClick={changeSelector}>&lt;</button>
+        <button type="button" className={styles.butNextCointry} onClick={changeSelector}><ArrowLeftIcon/></button>
         <span className={styles.selectors}>{nameSelector}</span>
-        <button type="button" id="next" onClick={changeSelector}>&gt;</button>
+        <button type="button" id="next" className={styles.butNextCointry} onClick={changeSelector}><ArrowRightIcon/></button>
       </div>
       <div>
-        <span>Find:</span>
-        <input className={styles.findArea} onChange={changeFindInput} type="text" value={value} />
+        <span>Search: </span>
+        <input className={styles.findArea} id="keyboard" onChange={changeFindInput} type="text" value={value} />
+        {/* <textarea name="find" id="keyboard" onChange={changeFindInput} value={value} cols="15" rows="1"></textarea> */}
       </div>
       <div className={styles.container}>
         <div>
           {sum.map(el => (
-            <div key={el.CountryCode}>
-              <img className={styles.flagImg} alt="flag" src={`https://www.countryflags.io/${el.CountryCode.toLowerCase()}/flat/16.png`} />
-              <span onClick={selectedCountry} className={styles.countries}>{el.Country}</span>
+            <div onClick={selectedCountry} id='countryWrapper' className={styles.coutrywrap} key={el.CountryCode}>
+              <div>
+                <img className={styles.flagImg} alt="flag" src={`https://www.countryflags.io/${el.CountryCode.toLowerCase()}/flat/16.png`} />
+                <span className={styles.countries}>{el.Country}</span>
+              </div>
               {numSelector <= 5
                 ? <span className={styles.countriesValue}>{el[nameSelector]}</span>
                 : <span className={styles.countriesValue}>{(el[selectors[numSelector % 6]] / el.population * per100K).toFixed(3)}</span>}
