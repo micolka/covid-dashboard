@@ -1,7 +1,7 @@
 import React from 'react';
 
-import VirusSrc from '@/assets/img/virus.png';
 import styles from '@/assets/stylesheets/header.scss';
+import VirusSrc from '@/static/images/virus.png';
 
 const Header = () => (
   <div className={styles['header-wrapper']}>

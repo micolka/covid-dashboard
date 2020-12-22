@@ -1,8 +1,8 @@
 import React from 'react';
 
-import GHLogoSrc from '@/assets/img/gh.png';
 import RSLogo from '@/assets/img/rs.svg';
 import styles from '@/assets/stylesheets/footer.scss';
+import GHLogoSrc from '@/static/images/gh.png';
 
 const Footer = () => (
   <div className={styles['footer-wrapper']}>

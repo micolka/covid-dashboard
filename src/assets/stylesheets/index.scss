@@ -45,3 +45,31 @@
   grid-template-rows: 60px 0 1fr 60px;
   grid-template-columns: 0 0 1fr;
 }
+
+@media (max-width: 1027px) {
+  .app-wrapper {
+    overflow-y: scroll;
+    grid-template-areas:
+    'header'
+    'stats'
+    'map'
+    'table'  
+    'graph'
+    'footer';
+    grid-template-rows: 60px 300px 500px 500px 500px 60px;
+    grid-template-columns: 1fr;
+  }
+
+  .app-wrapper::-webkit-scrollbar {
+    width: 12px;
+  }
+  
+  .app-wrapper::-webkit-scrollbar-thumb {
+    background:$text-red-color;
+    border-radius: 10px;
+  }
+
+  .fullScreenButton {
+    display: none!important;
+  }
+}
