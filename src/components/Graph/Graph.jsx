@@ -3,7 +3,7 @@
 import classNames from 'classnames';
 import React, { useState, useContext, useEffect } from 'react';
 import {
-  BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
+  BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer,
 } from 'recharts';
 
 import { getDayOneTotalAllStatus, getWorldTimeline } from '@/API/API';
@@ -79,28 +79,30 @@ const Graph = () => {
   }, [state]);
 
   return (
-    <div className={classNames(styles['graph-wrapper'], (statsF || tableF || mapF) ? styles['hide-graph'] : '')}>
+    <div id="graph" className={classNames(styles['graph-wrapper'], (statsF || tableF || mapF) ? styles['hide-graph'] : '')}>
       <div className={styles['fullscreen-container_wrapper']}>
         <div onClick={toggleFullScreen} className={styles.fullScreenButton}>
           <i className="material-icons">{graphF ? 'fullscreen_exit' : 'fullscreen'}</i>
         </div>
-        <BarChart
-          width={480}
-          height={400}
-          data={graphData}
-          margin={{
-            top: 20, right: 30, left: 20, bottom: 5,
-          }}
-        >
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="Date" />
-          <YAxis />
-          <Tooltip />
-          <Legend />
-          {state.currentCountry
-            ? (<Bar dataKey={getDataKey()} stackId="a" fill=" #e60000" />)
-            : (<Bar dataKey={getDataKey()} stackId="a" fill="#ffaa00" />)}
-        </BarChart>
+        <ResponsiveContainer width="95%" height="95%">
+          <BarChart
+            width={480}
+            height={400}
+            data={graphData}
+            margin={{
+              top: 20, right: 30, left: 20, bottom: 5,
+            }}
+          >
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="Date" />
+            <YAxis />
+            <Tooltip />
+            <Legend />
+            {state.currentCountry
+              ? (<Bar dataKey={getDataKey()} stackId="a" fill=" #e60000" />)
+              : (<Bar dataKey={getDataKey()} stackId="a" fill="#ffaa00" />)}
+          </BarChart>
+        </ResponsiveContainer>
       </div>
     </div>
   );
