@@ -39,7 +39,7 @@
       box-sizing: border-box;
     }
     &:before {
-      content: 'total';
+      content: '';
       text-transform: uppercase;
       padding-left: 10px;
       background-color: $text-red-color;
@@ -55,7 +55,7 @@
     }
   }
   &-inner:after {
-    content: 'new';
+    content: '';
     text-transform: uppercase;
     padding-right: 10px;
     background-color: #bbb;

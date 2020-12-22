@@ -15,11 +15,17 @@ export const initialReducerState = {
 
 export const appReducer = (state, action) => {
   switch (action.type) {
+    case 'SET-PER100K-STATS':
+      return {
+        ...state,
+        per100k: !state.per100k,
+      };
     case 'SET-CURRENT-COUNTRY':
       return {
         ...state,
         currentCountry: action.payload,
       };
+
     case 'SET-DISPLAY-STAT':
       return {
         ...state,
