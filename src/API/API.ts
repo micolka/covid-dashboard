@@ -1,10 +1,18 @@
 import {
-  TCountry, TAllStatus, TSummary, TTimeline, TWorldTotalWIP, TPopulation,
+  TCountry,
+  TAllStatus,
+  TSummary,
+  TTimeline,
+  TWorldTotalWIP,
+  TPopulation,
+  TDiseaseAll,
+  TDiseaseCountries,
 } from './APITypes';
 
 export const API = {
   URL: 'https://api.covid19api.com',
   URL1: 'https://covid19-api.org/api/timeline',
+  URLDisease: 'https://disease.sh/v3/covid-19',
   URLCountries: 'https://restcountries.eu/rest/v2/all?fields=name;population;alpha2Code',
   ENDPOINTS: {
     ALL: 'all',
@@ -70,4 +78,16 @@ export const getWorldTotalWIP = async (): Promise<TWorldTotalWIP> => {
 
   const response = await fetch(`${URL}/${WORLD}/${TOTAL}`);
   return (await response.json()) as TWorldTotalWIP;
+};
+
+export const getDiseaseAll = async (): Promise<TDiseaseAll> => {
+  const { URLDisease, ENDPOINTS } = API;
+  const response = await fetch(`${URLDisease}/${ENDPOINTS.ALL}`);
+  return (await response.json()) as TDiseaseAll;
+};
+
+export const getDiseaseCountries = async (): Promise<TDiseaseCountries> => {
+  const { URLDisease, ENDPOINTS } = API;
+  const response = await fetch(`${URLDisease}/${ENDPOINTS.COUNTRIES}`);
+  return (await response.json()) as TDiseaseCountries;
 };

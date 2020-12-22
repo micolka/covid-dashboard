@@ -11,6 +11,12 @@ export const initialReducerState = {
   currentStat: TotalConfirmed,
   per100k: false,
   allTime: true,
+  fullscreen: {
+    table: false,
+    map: false,
+    stats: false,
+    graph: false,
+  },
 };
 
 export const appReducer = (state, action) => {
@@ -24,6 +30,11 @@ export const appReducer = (state, action) => {
       return {
         ...state,
         currentStat: action.payload,
+      };
+    case 'TOGGLE-FULLSCREEN-MODE':
+      return {
+        ...state,
+        fullscreen: { ...state.fullscreen, ...action.payload },
       };
     default:
       return state;
