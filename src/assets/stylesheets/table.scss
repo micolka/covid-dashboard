@@ -29,7 +29,8 @@
 }
 
 .countryHeader {
-  font-size: 19px;
+  padding: 14px 0;
+  font-size: 21px;
   color: rgb(179, 130, 130);
 }
 
@@ -48,6 +49,11 @@
   justify-content: space-between;
 }
 
+.coutrywrapFullScr {
+  margin-left: 20%;
+  margin-right: 20%;
+}
+
 .coutrywrap:hover {
   cursor: pointer;
   background: #586068;
@@ -62,21 +68,27 @@
 }
 
 .findArea {
-  width: 60%;
+  width: 140px;
   background: #7c7971;
   outline: none;
   color: #d6d6d6;
 }
 
-// .selectors {
-//   width: 100%;
-// }
+.selectors {
+  width: 150px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 2px;
+  padding-right: 2px;
+}
 
 .containerSelectors {
   display: flex;
-  padding: 0 10%;
+  padding: 6px 0;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
   margin-bottom: 5px;
 }
 
@@ -90,88 +102,9 @@
   cursor: pointer;
 }
 
-
-
 .simple-keyboard {
   max-width: 850px;
   z-index: 1000000;
-}
-
-// .hg-theme-default{width:100%;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;box-sizing:border-box;overflow:hidden;touch-action:manipulation}.hg-theme-default .hg-button span{pointer-events:none}.hg-theme-default button.hg-button{border-width:0;outline:0;font-size:inherit}.hg-theme-default{font-family:"HelveticaNeue-Light","Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;background-color:#ececec;padding:5px;border-radius:5px}.hg-theme-default .hg-button{display:inline-block;flex-grow:1}.hg-theme-default .hg-row{display:flex}.hg-theme-default .hg-row:not(:last-child){margin-bottom:5px}.hg-theme-default .hg-row .hg-button-container,.hg-theme-default .hg-row .hg-button:not(:last-child){margin-right:5px}.hg-theme-default .hg-row>div:last-child{margin-right:0}.hg-theme-default .hg-row .hg-button-container{display:flex}.hg-theme-default .hg-button{box-shadow:0 0 3px -1px rgba(0,0,0,.3);height:40px;border-radius:5px;box-sizing:border-box;padding:5px;background:#fff;border-bottom:1px solid #b5b5b5;cursor:pointer;display:flex;align-items:center;justify-content:center;-webkit-tap-highlight-color:rgba(0,0,0,0)}.hg-theme-default .hg-button.hg-activeButton{background:#efefef}.hg-theme-default.hg-layout-numeric .hg-button{width:33.3%;height:60px;align-items:center;display:flex;justify-content:center}.hg-theme-default .hg-button.hg-button-numpadadd,.hg-theme-default .hg-button.hg-button-numpadenter{height:85px}.hg-theme-default .hg-button.hg-button-numpad0{width:105px}.hg-theme-default .hg-button.hg-button-com{max-width:85px}.hg-theme-default .hg-button.hg-standardBtn.hg-button-at{max-width:45px}.hg-theme-default .hg-button.hg-selectedButton{background:rgba(5,25,70,.53);color:#fff}.hg-theme-default .hg-button.hg-standardBtn[data-skbtn=".com"]{max-width:82px}.hg-theme-default .hg-button.hg-standardBtn[data-skbtn="@"]{max-width:60px}
-
-
-.keyboard {
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  padding: 5px 0;
-  background: #004134;
-  box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
-  user-select: none;
-  transition: bottom 0.4s;
-  z-index: 10000;
-}
-
-.keyboardhidden {
-  bottom: -100%;
-}
-
-.keyboard__keys {
-  text-align: center;
-}
-
-.keyboard__key {
-  height: 45px;
-  width: 6%;
-  max-width: 90px;
-  margin: 3px;
-  border-radius: 4px;
-  border: none;
-  background: rgba(255, 255, 255, 0.2);
-  color: #ffffff;
-  font-size: 1.05rem;
-  outline: none;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  vertical-align: top;
-  padding: 0;
-  -webkit-tap-highlight-color: transparent;
-  position: relative;
-}
-
-.keyboard__key:active {
-  background: rgba(255, 255, 255, 0.12);
-}
-
-.keyboard__keywide {
-  width: 12%;
-}
-
-.keyboard__keyextrawide {
-  width: 36%;
-  max-width: 500px;
-}
-
-.keyboard__keyactivatable::after {
-  content: '';
-  top: 10px;
-  right: 10px;
-  position: absolute;
-  width: 8px;
-  height: 8px;
-  background: rgba(0, 0, 0, 0.4);
-  border-radius: 50%;
-}
-
-.keyboard__keyactive::after {
-  background: #08ff00;
-}
-
-.keyboard__keydark {
-  background: rgba(0, 0, 0, 0.25);
 }
 
 .hide-table {
