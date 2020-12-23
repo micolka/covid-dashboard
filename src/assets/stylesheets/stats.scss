@@ -76,3 +76,15 @@
 .hide-stats {
   display: none;
 }
+
+@media (max-width: 1027px) {
+  .stats-wrapper {
+    .stats-full-screen{
+      font-size: medium;
+      padding: 0 10%;
+    }
+    .stats-toggle-container_fullScreen{
+      width: 67%;
+    }
+  }
+}
