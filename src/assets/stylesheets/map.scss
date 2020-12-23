@@ -100,3 +100,9 @@
 .hide-map {
   display: none;
 }
+
+@media (max-width: 1027px) {
+  .map_buttons-wrapper{
+    height: 8%;
+  }
+}
