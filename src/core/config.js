@@ -20,4 +20,5 @@ export const displayParams = {
   TotalDeaths: 'TotalDeaths',
   TotalRecovered: 'TotalRecovered',
 };
-export const per100th = 7827;
+export const per100th = 100000;
+export const allPopulation = 7827000000;
