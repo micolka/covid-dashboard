@@ -69,7 +69,19 @@
     border-radius: 10px;
   }
 
-  .fullScreenButton {
-    display: none!important;
+  .stats_full-screen {
+    grid-template-rows: 60px 1fr 0 0 0 60px;
+  }
+
+  .map_full-screen {
+    grid-template-rows: 60px 0 1fr 0 0 60px;
+  }
+  
+  .table_full-screen {
+    grid-template-rows: 60px 0 0 1fr 0 60px;
+  }
+  
+  .graph_full-screen {
+    grid-template-rows: 60px 0 0 0 1fr 60px;
   }
 }

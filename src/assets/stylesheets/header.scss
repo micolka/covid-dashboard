@@ -6,13 +6,38 @@
   @include wrapper-props;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   padding: 1em;
+
+  .logo-wrapper {
+    display: flex;
+    align-items: center;
+  }
+
   .header-logo{
     padding-left: .5em;
     width: 3em;
+    cursor: pointer;
   }
   .header-title{
     color: $text-yellow-color;
+    cursor: pointer;
   }
   grid-area: header;
+
+  .header_button {
+    height: 40px;
+    padding: 0 10px;
+    line-height: 40px;
+    border-radius: 3px;
+    text-align: center;
+    background-color: $text-red-color;
+    transition: all 0.3s ease-out;
+  }
+
+  .header_button:hover {
+    cursor: pointer;
+    opacity: 0.6;
+  }
 }
+
