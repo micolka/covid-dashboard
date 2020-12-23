@@ -6,6 +6,19 @@
 .stats-wrapper {
   @include wrapper-props;
   @include fullscreen-btn;
+  .stats-full-screen{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size: larger;
+    padding: 5% 20%;
+    .stats-full-screen-title{
+      justify-content: center;
+      font-size: larger;
+      padding-bottom: 2em;
+      margin: 0;
+    }
+  }
   grid-area: stats;
   padding: 1em;
   display: flex;
@@ -35,22 +48,26 @@
     align-items: center;
     height: 3.3em;
   }
+  .stats-toggle-container_fullScreen{
+    width: 40%;
+  }
+
   .stats-table {
     display: flex;
     justify-content: space-between;
     .stats-title, .stats-data-title{
       margin: .3em 0;
     }
-    .stats-data-recovered {
+    .stats-data{
       margin: .5em;
+    }
+    .recovered {
       color: $text-green-color;
     }
-    .stats-data-confirmed{
-      margin: .5em;
+    .confirmed{
       color: $text-yellow-color;
     }
-    .stats-data-deaths{
-      margin: .5em;
+    .deaths{
       color: $text-red-color;
     }
   }

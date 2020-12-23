@@ -1,4 +1,4 @@
-@charset 'UTF-8';
+@charset "UTF-8";
 
 @import 'variables';
 @import 'mixins';
@@ -40,4 +40,23 @@
   }
 
   grid-area: footer;
+}
+
+@media (max-width: 550px) {
+  .footer-wrapper{
+    .footer-link-container {
+      .footer-link {
+        font-size: .8em;
+      }
+    }
+    .footer-GHLogo{
+      width: 1.1em;
+      margin-right: .5em;
+    }
+    .footer-logo-container {
+      .footer-RSLogo {
+        width: 5em;
+      }
+    }
+  }
 }

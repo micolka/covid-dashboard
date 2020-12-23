@@ -7,7 +7,7 @@ import styles from '@/assets/stylesheets/stats.scss';
 import ToggleSwitch from '@/components/Switch/Switch';
 import { ContextApp } from '@/core/reducer';
 
-import { per100th } from '../../core/config';
+import { per100th, allPopulation } from '../../core/config';
 
 const Stats = props => {
   const [checked, setChecked] = useState(false);
@@ -17,6 +17,7 @@ const Stats = props => {
     graphF, tableF, mapF, statsF,
   } = state.fullscreen;
   const curCountry = state.currentCountry || {};
+  const countryPopulation = curCountry.population;
   const global = summary.Global || {};
   const countryCode = curCountry.CountryCode || '';
   const country = curCountry.Country || 'Global';
@@ -28,7 +29,8 @@ const Stats = props => {
   const newRecovered = curCountry.NewRecovered || global.NewRecovered;
 
   function recalculatePer100th(digit) {
-    return Math.round(digit / per100th);
+    if (curCountry.Country) return Math.round((digit / countryPopulation) * per100th);
+    return Math.round((digit / allPopulation) * per100th);
   }
 
   const [show, setShow] = useState(false);
@@ -61,35 +63,34 @@ const Stats = props => {
 
   return (
     <div className={classNames(styles['stats-wrapper'], (graphF || tableF || mapF) ? styles['hide-stats'] : '')}>
-      <div className={styles['fullscreen-container_wrapper']}>
+      <div className={classNames(styles['fullscreen-container_wrapper'], statsF ? styles['stats-full-screen'] : '')}>
         <div onClick={toggleFullScreen} className={styles.fullScreenButton}>
           <i className="material-icons">{statsF ? 'fullscreen_exit' : 'fullscreen'}</i>
         </div>
-        <div className={styles['stats-main-title']}>
+        <div className={classNames(styles['stats-main-title'], statsF ? styles['stats-full-screen-title'] : '')}>
           {flag}
           <h2 className={styles['stats-country']}>{country}</h2>
         </div>
         <div className={styles['stats-table']}>
           <h3 className={styles['stats-data-title']}>
             Confirmed:
-            <span className={styles['stats-data-confirmed']}>{confirmed}</span>
+            <span className={classNames(styles['stats-data'], styles['confirmed'])}>{confirmed}</span>
           </h3>
           <h3 className={styles['stats-data-title']}>
             Deaths:
-
-            <span className={styles['stats-data-deaths']}>{deaths}</span>
+            <span className={classNames(styles['stats-data'], styles['deaths'])}>{deaths}</span>
           </h3>
           <h3 className={styles['stats-data-title']}>
             Recovered:
-            <span className={styles['stats-data-recovered']}>{recovered}</span>
+            <span className={classNames(styles['stats-data'], styles['recovered'])}>{recovered}</span>
           </h3>
         </div>
-        <div className={styles['stats-toggle-container']}>
-          <h4 className={styles['stats-title']}>{title}</h4>
+        <div className={classNames(styles['stats-toggle-container'], statsF ? styles['stats-toggle-container_fullScreen'] : '')}>
+          <h4 className={classNames(styles['stats-title'], styles['stats-title_fullScreen'])}>{title}</h4>
           <ToggleSwitch id="toggleSwitch" checked={checked} onChange={setChecked} />
         </div>
-        <div className={styles['stats-toggle-container']}>
-          <h4>{population}</h4>
+        <div className={classNames(styles['stats-toggle-container'],statsF ? styles['stats-toggle-container_fullScreen'] : '')}>
+          <h4 className={classNames(styles['stats-title'], styles['stats-title_fullScreen'])}>{population}</h4>
           <ToggleSwitch id="per100k" checked={show} onChange={handleClick} />
         </div>
       </div>
