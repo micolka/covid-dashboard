@@ -3,13 +3,15 @@
 import ArrowLeftIcon from '@material-ui/icons/ArrowLeft';
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 import classNames from 'classnames';
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useRef, useState, useEffect, useContext } from 'react';
 
 import styles from '@/assets/stylesheets/table.scss';
 import { ContextApp } from '@/core/reducer';
 
 import { selectors } from './Constants';
-import { Keyboard } from './keyboard';
+import Keyboard from 'react-simple-keyboard';
+import 'react-simple-keyboard/build/css/index.css';
+// import { Keyboard } from './keyboard';
 
 const Table = props => {
   const [numSelector, setNumSelector] = useState(0);
@@ -21,6 +23,32 @@ const Table = props => {
   let sum = props.summary.Countries;
   const nameSelector = selectors[numSelector];
   const per100K = 100000;
+
+  const onChange = input => {
+    setValue(e.currentTarget.value);
+    // setInput(input);
+    console.log("Input changed", input);
+  };
+  // const [input, setInput] = useState('');
+  const [layout, setLayout] = useState("default");
+  const keyboard = useRef();
+  const handleShift = () => {
+    const newLayoutName = layout === "default" ? "shift" : "default";
+    setLayout(newLayoutName);
+  };
+
+  const onKeyPress = button => {
+    console.log("Button pressed", button);
+    if (button === "{shift}" || button === "{lock}") handleShift();
+  };
+
+  // const onChangeInput = event => {
+  //   const input = event.target.value;
+  //   setInput(input);
+  //   keyboard.current.setInput(input);
+  // };
+
+
 
   // console.log(sum)
 
@@ -36,6 +64,7 @@ const Table = props => {
 
   const changeFindInput = e => {
     setValue(e.currentTarget.value);
+    keyboard.current.setInput(e.currentTarget.value);
   };
 
   if (value.length !== 0) {
@@ -64,9 +93,9 @@ const Table = props => {
     });
   }
 
-  useEffect(() => {
-    Keyboard.init();
-  }, []);
+  // useEffect(() => {
+  //   Keyboard.init();
+  // }, []);
 
   return (
     <div className={classNames(styles['table-wrapper'], (graphF || statsF || mapF) ? styles['hide-table'] : '')}>
@@ -83,7 +112,6 @@ const Table = props => {
         <div>
           <span>Search: </span>
           <input className={styles.findArea} id="keyboard" onChange={changeFindInput} type="text" value={value} />
-          {/* <textarea name="find" id="keyboard" onChange={changeFindInput} value={value} cols="15" rows="1"></textarea> */}
         </div>
         <div className={styles.container}>
           <div>
@@ -101,6 +129,13 @@ const Table = props => {
           </div>
         </div>
       </div>
+      <Keyboard
+        id='keyb'
+        keyboardRef={r => (keyboard.current = r)}
+        layoutName={layout}
+        onChange={onChange}
+        onKeyPress={onKeyPress}
+      />
     </div>
   );
 };
