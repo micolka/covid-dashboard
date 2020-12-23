@@ -3,8 +3,10 @@
 import ArrowLeftIcon from '@material-ui/icons/ArrowLeft';
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 import classNames from 'classnames';
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useRef } from 'react';
+import Keyboard from 'react-simple-keyboard';
 
+import 'react-simple-keyboard/build/css/index.css';
 import styles from '@/assets/stylesheets/table.scss';
 import { ContextApp } from '@/core/reducer';
 
@@ -13,6 +15,22 @@ import { selectors } from './Constants';
 const Table = props => {
   const [numSelector, setNumSelector] = useState(0);
   const [value, setValue] = useState('');
+  const [layout, setLayout] = useState('default');
+  const keyboard = useRef();
+
+  const onChange = input => {
+    setValue(input);
+  };
+
+  const handleShift = () => {
+    const newLayoutName = layout === 'default' ? 'shift' : 'default';
+    setLayout(newLayoutName);
+  };
+
+  const onKeyPress = button => {
+    if (button === '{shift}' || button === '{lock}') handleShift();
+  };
+
   const { state, dispatch } = useContext(ContextApp);
   const {
     statsF, graphF, mapF, tableF,
@@ -32,7 +50,9 @@ const Table = props => {
   };
 
   const changeFindInput = e => {
-    setValue(e.currentTarget.value);
+    const input = e.target.value;
+    setValue(input);
+    keyboard.current.setInput(input);
   };
 
   if (value.length !== 0) {
@@ -60,9 +80,27 @@ const Table = props => {
       payload: { tableF: !state.fullscreen.tableF },
     });
   }
+  const keysLayout = {
+    default: [
+      'q w e r t y u i o p',
+      'a s d f g h j k l',
+      'z x c v b n m {backspace}',
+      '{space}',
+    ],
+  };
 
   return (
     <div className={classNames(styles['table-wrapper'], (graphF || statsF || mapF) ? styles['hide-table'] : '')}>
+      <div className={classNames(tableF ? styles.keyboardWrap : '')}>
+        <Keyboard
+          keyboardRef={r => (keyboard.current = r)}
+          theme="hg-theme-default myTheme1"
+          layoutName={layout}
+          layout={keysLayout}
+          onChange={onChange}
+          onKeyPress={onKeyPress}
+        />
+      </div>
       <div className={styles['fullscreen-container_wrapper']}>
         <div onClick={toggleFullScreen} className={styles.fullScreenButton}>
           <i className="material-icons">{tableF ? 'fullscreen_exit' : 'fullscreen'}</i>
@@ -75,7 +113,7 @@ const Table = props => {
         </div>
         <div>
           <span>Search: </span>
-          <input className={styles.findArea} id="keyboard" onChange={changeFindInput} type="text" value={value} />
+          <input className={styles.findArea} onChange={changeFindInput} type="text" value={value} />
         </div>
         <div className={styles.container}>
           <div>
