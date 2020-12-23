@@ -29,7 +29,8 @@
 }
 
 .countryHeader {
-  font-size: 19px;
+  padding: 14px 0;
+  font-size: 21px;
   color: rgb(179, 130, 130);
 }
 
@@ -48,6 +49,11 @@
   justify-content: space-between;
 }
 
+.coutrywrapFullScr {
+  margin-left: 20%;
+  margin-right: 20%;
+}
+
 .coutrywrap:hover {
   cursor: pointer;
   background: #586068;
@@ -62,21 +68,27 @@
 }
 
 .findArea {
-  width: 60%;
+  width: 140px;
   background: #7c7971;
   outline: none;
   color: #d6d6d6;
 }
 
-// .selectors {
-//   width: 100%;
-// }
+.selectors {
+  width: 150px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 2px;
+  padding-right: 2px;
+}
 
 .containerSelectors {
   display: flex;
-  padding: 0 10%;
+  padding: 6px 0;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
   margin-bottom: 5px;
 }
 
@@ -90,85 +102,9 @@
   cursor: pointer;
 }
 
-
-
-
-
-
-
-
-.keyboard {
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  padding: 5px 0;
-  background: #004134;
-  box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
-  user-select: none;
-  transition: bottom 0.4s;
-  z-index: 10000;
-}
-
-.keyboardhidden {
-  bottom: -100%;
-}
-
-.keyboard__keys {
-  text-align: center;
-}
-
-.keyboard__key {
-  height: 45px;
-  width: 6%;
-  max-width: 90px;
-  margin: 3px;
-  border-radius: 4px;
-  border: none;
-  background: rgba(255, 255, 255, 0.2);
-  color: #ffffff;
-  font-size: 1.05rem;
-  outline: none;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  vertical-align: top;
-  padding: 0;
-  -webkit-tap-highlight-color: transparent;
-  position: relative;
-}
-
-.keyboard__key:active {
-  background: rgba(255, 255, 255, 0.12);
-}
-
-.keyboard__keywide {
-  width: 12%;
-}
-
-.keyboard__keyextrawide {
-  width: 36%;
-  max-width: 500px;
-}
-
-.keyboard__keyactivatable::after {
-  content: '';
-  top: 10px;
-  right: 10px;
-  position: absolute;
-  width: 8px;
-  height: 8px;
-  background: rgba(0, 0, 0, 0.4);
-  border-radius: 50%;
-}
-
-.keyboard__keyactive::after {
-  background: #08ff00;
-}
-
-.keyboard__keydark {
-  background: rgba(0, 0, 0, 0.25);
+.simple-keyboard {
+  max-width: 850px;
+  z-index: 1000000;
 }
 
 .hide-table {

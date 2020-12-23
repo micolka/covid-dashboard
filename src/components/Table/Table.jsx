@@ -3,13 +3,12 @@
 import ArrowLeftIcon from '@material-ui/icons/ArrowLeft';
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 import classNames from 'classnames';
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 
 import styles from '@/assets/stylesheets/table.scss';
 import { ContextApp } from '@/core/reducer';
 
 import { selectors } from './Constants';
-import { Keyboard } from './keyboard';
 
 const Table = props => {
   const [numSelector, setNumSelector] = useState(0);
@@ -21,8 +20,6 @@ const Table = props => {
   let sum = props.summary.Countries;
   const nameSelector = selectors[numSelector];
   const per100K = 100000;
-
-  // console.log(sum)
 
   const changeSelector = e => {
     if (e.target.closest('button').id === 'next') {
@@ -64,31 +61,26 @@ const Table = props => {
     });
   }
 
-  useEffect(() => {
-    Keyboard.init();
-  }, []);
-
   return (
     <div className={classNames(styles['table-wrapper'], (graphF || statsF || mapF) ? styles['hide-table'] : '')}>
       <div className={styles['fullscreen-container_wrapper']}>
         <div onClick={toggleFullScreen} className={styles.fullScreenButton}>
           <i className="material-icons">{tableF ? 'fullscreen_exit' : 'fullscreen'}</i>
         </div>
-        <span className={styles.countryHeader}>Countries</span>
+        <div className={styles.countryHeader}><span>Countries</span></div>
         <div className={styles.containerSelectors}>
           <button type="button" className={styles.butNextCointry} onClick={changeSelector}><ArrowLeftIcon /></button>
-          <span className={styles.selectors}>{nameSelector}</span>
+          <div className={styles.selectors}><span>{nameSelector}</span></div>
           <button type="button" id="next" className={styles.butNextCointry} onClick={changeSelector}><ArrowRightIcon /></button>
         </div>
         <div>
           <span>Search: </span>
           <input className={styles.findArea} id="keyboard" onChange={changeFindInput} type="text" value={value} />
-          {/* <textarea name="find" id="keyboard" onChange={changeFindInput} value={value} cols="15" rows="1"></textarea> */}
         </div>
         <div className={styles.container}>
           <div>
             {sum.map(el => (
-              <div onClick={selectedCountry} id="countryWrapper" className={styles.coutrywrap} key={el.CountryCode}>
+              <div onClick={selectedCountry} id="countryWrapper" className={classNames(styles.coutrywrap, tableF ? styles.coutrywrapFullScr : '')} key={el.CountryCode}>
                 <div>
                   <img className={styles.flagImg} alt="flag" src={`https://www.countryflags.io/${el.CountryCode.toLowerCase()}/flat/16.png`} />
                   <span className={styles.countries}>{el.Country}</span>
