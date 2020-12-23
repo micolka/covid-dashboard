@@ -59,6 +59,7 @@ export function formatSummaryData(dataAll, dataCountries) {
       TotalDeaths: elem.deaths,
       NewRecovered: elem.todayRecovered,
       TotalRecovered: elem.recovered,
+      population: elem.population,
       Date: new Date(elem.updated).toISOString(),
       Premium: {
       },
