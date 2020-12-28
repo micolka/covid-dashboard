@@ -8,7 +8,7 @@ import React, { useState, useContext } from 'react';
 import styles from '@/assets/stylesheets/table.scss';
 import { ContextApp } from '@/core/reducer';
 
-import { selectors } from './Constants';
+import selectors from './Constants';
 
 const Table = props => {
   const [numSelector, setNumSelector] = useState(0);
@@ -17,7 +17,8 @@ const Table = props => {
   const {
     statsF, graphF, mapF, tableF,
   } = state.fullscreen;
-  let sum = props.summary.Countries;
+  const { summary } = props;
+  let sum = summary.Countries;
   const nameSelector = selectors[numSelector];
   const per100K = 100000;
 
@@ -42,8 +43,8 @@ const Table = props => {
   if (numSelector <= 5) {
     sum.sort((a, b) => b[nameSelector] - a[nameSelector]);
   } else {
-    sum.sort((a, b) => (b[selectors[numSelector % 6]] / b.population * per100K)
-    - (a[selectors[numSelector % 6]] / a.population * per100K));
+    sum.sort((a, b) => ((b[selectors[numSelector % 6]] / b.population) * per100K)
+    - ((a[selectors[numSelector % 6]] / a.population) * per100K));
   }
 
   const selectedCountry = e => {
@@ -69,9 +70,13 @@ const Table = props => {
         </div>
         <div className={styles.countryHeader}><span>Countries</span></div>
         <div className={styles.containerSelectors}>
-          <button type="button" className={styles.butNextCointry} onClick={changeSelector}><ArrowLeftIcon /></button>
+          <button type="button" className={styles.butNextCointry} onClick={changeSelector}>
+            <ArrowLeftIcon />
+          </button>
           <div className={styles.selectors}><span>{nameSelector}</span></div>
-          <button type="button" id="next" className={styles.butNextCointry} onClick={changeSelector}><ArrowRightIcon /></button>
+          <button type="button" id="next" className={styles.butNextCointry} onClick={changeSelector}>
+            <ArrowRightIcon />
+          </button>
         </div>
         <div>
           <span>Search: </span>
@@ -87,7 +92,7 @@ const Table = props => {
                 </div>
                 {numSelector <= 5
                   ? <span className={styles.countriesValue}>{el[nameSelector]}</span>
-                  : <span className={styles.countriesValue}>{(el[selectors[numSelector % 6]] / el.population * per100K).toFixed(3)}</span>}
+                  : <span className={styles.countriesValue}>{((el[selectors[numSelector % 6]] / el.population) * per100K).toFixed(3)}</span>}
               </div>
             ))}
           </div>
