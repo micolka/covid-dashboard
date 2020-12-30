@@ -19,7 +19,6 @@ const formStylesRule = (useModules = false) => ({
     {
       loader: 'css-loader',
       options: {
-        modules: true,
         url: false,
         importLoaders: 1,
         sourceMap: true,
@@ -37,7 +36,7 @@ const formStylesRule = (useModules = false) => ({
 const config: Configuration = {
   mode: isProduction ? 'production' : 'development',
   devtool: isProduction ? false : 'source-map',
-  entry: ['babel-polyfill', './src/index.jsx'],
+  entry: './src/index.tsx',
   output: {
     path: resolve(__dirname, 'build'),
     publicPath: '/',
